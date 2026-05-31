@@ -64,7 +64,7 @@ nav{position:sticky;top:0;z-index:100;padding:0 20px;height:52px;background:rgba
 .ring-c{inset:21px;border:0.5px solid rgba(0,212,170,.1);animation:rs 20s linear infinite}
 @keyframes rs{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .ring-core{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.glyph{width:54px;height:58px;animation:gp 3s ease-in-out infinite;image-rendering:pixelated}
+.glyph{width:62px;height:68px;animation:gp 3s ease-in-out infinite;overflow:visible}
 @keyframes gp{0%,100%{transform:translateY(0);filter:drop-shadow(0 0 6px rgba(0,212,170,.35))}50%{transform:translateY(-6px);filter:drop-shadow(0 0 12px rgba(0,212,170,.6))}}
 .odot{position:absolute;border-radius:50%;top:50%;left:50%;transform-origin:0 0}
 .odot1{width:5px;height:5px;background:var(--acc);animation:orb 6s linear infinite;margin:-2.5px 0 0 -2.5px}
@@ -257,7 +257,94 @@ footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:2}
     <div class="ring-c"></div>
     <div class="odot odot1"></div>
     <div class="odot odot2"></div>
-    <div class="ring-core"><svg class="glyph" viewBox="0 0 60 65" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="10" y="0" width="5" height="5" fill="#1e3050"/><rect x="15" y="0" width="5" height="5" fill="#1e3050"/><rect x="20" y="0" width="5" height="5" fill="#1e3050"/><rect x="25" y="0" width="5" height="5" fill="#1e3050"/><rect x="30" y="0" width="5" height="5" fill="#1e3050"/><rect x="35" y="0" width="5" height="5" fill="#1e3050"/><rect x="40" y="0" width="5" height="5" fill="#1e3050"/><rect x="45" y="0" width="5" height="5" fill="#1e3050"/><rect x="5" y="5" width="5" height="5" fill="#1e3050"/><rect x="10" y="5" width="5" height="5" fill="#1e3050"/><rect x="15" y="5" width="5" height="5" fill="#1e3050"/><rect x="20" y="5" width="5" height="5" fill="#1e3050"/><rect x="25" y="5" width="5" height="5" fill="#1e3050"/><rect x="30" y="5" width="5" height="5" fill="#1e3050"/><rect x="35" y="5" width="5" height="5" fill="#1e3050"/><rect x="40" y="5" width="5" height="5" fill="#1e3050"/><rect x="45" y="5" width="5" height="5" fill="#1e3050"/><rect x="50" y="5" width="5" height="5" fill="#1e3050"/><rect x="0" y="10" width="60" height="10" fill="#1e3050"/><rect x="0" y="20" width="60" height="5" fill="#1e3050"/><rect x="10" y="20" width="10" height="5" fill="#00d4aa"/><rect x="40" y="20" width="10" height="5" fill="#00d4aa"/><rect x="0" y="25" width="60" height="5" fill="#1e3050"/><rect x="10" y="25" width="5" height="5" fill="#00d4aa"/><rect x="15" y="25" width="5" height="5" fill="#4dffd6"/><rect x="40" y="25" width="5" height="5" fill="#00d4aa"/><rect x="45" y="25" width="5" height="5" fill="#4dffd6"/><rect x="0" y="30" width="60" height="5" fill="#1e3050"/><rect x="0" y="35" width="60" height="5" fill="#1e3050"/><rect x="15" y="35" width="30" height="5" fill="#c8ddef"/><rect x="0" y="40" width="60" height="5" fill="#1e3050"/><rect x="15" y="40" width="5" height="5" fill="#c8ddef"/><rect x="40" y="40" width="5" height="5" fill="#c8ddef"/><rect x="0" y="45" width="60" height="5" fill="#1e3050"/><rect x="20" y="45" width="20" height="5" fill="#c8ddef"/><rect x="0" y="50" width="60" height="5" fill="#1e3050"/><rect x="5" y="55" width="50" height="5" fill="#1e3050"/><rect x="10" y="60" width="40" height="5" fill="#1e3050"/></svg></div>
+    <div class="ring-core"><svg class="glyph" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Neck -->
+  <rect x="41" y="78" width="18" height="16" rx="3" fill="#f0c8a0"/>
+
+  <!-- Collar / orange top -->
+  <path d="M28 94 Q35 88 41 86 L41 94 L59 94 L59 86 Q65 88 72 94 L72 110 L28 110Z" fill="#e05c0a"/>
+  <!-- Collar inner -->
+  <path d="M41 86 Q50 90 59 86 L59 94 Q50 92 41 94Z" fill="#f07820"/>
+
+  <!-- Yellow pendant -->
+  <ellipse cx="50" cy="84" rx="4" ry="3.5" fill="#f5c842" stroke="#c89e00" stroke-width="0.8"/>
+  <ellipse cx="50" cy="84" rx="2" ry="1.8" fill="#ffe066"/>
+
+  <!-- Face base -->
+  <ellipse cx="50" cy="58" rx="20" ry="22" fill="#f0c8a0"/>
+
+  <!-- Ear left -->
+  <ellipse cx="30.5" cy="58" rx="3.5" ry="4.5" fill="#f0c8a0"/>
+  <ellipse cx="30.5" cy="58" rx="2" ry="2.8" fill="#e8a888"/>
+
+  <!-- Ear right -->
+  <ellipse cx="69.5" cy="58" rx="3.5" ry="4.5" fill="#f0c8a0"/>
+  <ellipse cx="69.5" cy="58" rx="2" ry="2.8" fill="#e8a888"/>
+
+  <!-- Hair back layer -->
+  <ellipse cx="50" cy="46" rx="22" ry="20" fill="#181818"/>
+
+  <!-- Hair sides (long) -->
+  <path d="M30 50 Q24 62 26 76 Q30 80 33 76 Q32 64 34 52Z" fill="#181818"/>
+  <path d="M70 50 Q76 62 74 76 Q70 80 67 76 Q68 64 66 52Z" fill="#181818"/>
+
+  <!-- Face front (over hair) -->
+  <path d="M32 52 Q32 38 50 36 Q68 38 68 52 Q68 76 50 78 Q32 76 32 52Z" fill="#f0c8a0"/>
+
+  <!-- Hair front / fringe -->
+  <path d="M32 52 Q34 42 50 40 Q66 42 68 52 Q66 46 62 44 Q58 38 54 40 Q52 34 50 36 Q48 34 46 40 Q42 38 38 44 Q34 46 32 52Z" fill="#181818"/>
+
+  <!-- Hair top tuft -->
+  <path d="M48 38 Q47 30 50 26 Q53 30 52 38Z" fill="#181818"/>
+
+  <!-- Eyebrows -->
+  <path d="M37 49 Q42 46 47 48" stroke="#181818" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M53 48 Q58 46 63 49" stroke="#181818" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+  <!-- Left eye white -->
+  <ellipse cx="42" cy="56" rx="6" ry="6.5" fill="white"/>
+  <!-- Left iris -->
+  <ellipse cx="42" cy="56.5" rx="4.5" ry="5" fill="#8b4a1c"/>
+  <!-- Left pupil -->
+  <ellipse cx="42" cy="57" rx="2.8" ry="3.2" fill="#1a0800"/>
+  <!-- Left eye highlight big -->
+  <ellipse cx="40.2" cy="54.5" rx="1.6" ry="1.3" fill="white"/>
+  <!-- Left eye highlight small -->
+  <circle cx="43.5" cy="58.2" r="0.7" fill="white" opacity="0.7"/>
+  <!-- Left lower lash line -->
+  <path d="M36.5 57.5 Q42 61 47.5 57.5" stroke="#181818" stroke-width="0.8" fill="none"/>
+  <!-- Left upper lash -->
+  <path d="M36.5 54.8 Q42 51.5 47.5 54.8" stroke="#181818" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+  <!-- Right eye white -->
+  <ellipse cx="58" cy="56" rx="6" ry="6.5" fill="white"/>
+  <!-- Right iris -->
+  <ellipse cx="58" cy="56.5" rx="4.5" ry="5" fill="#8b4a1c"/>
+  <!-- Right pupil -->
+  <ellipse cx="58" cy="57" rx="2.8" ry="3.2" fill="#1a0800"/>
+  <!-- Right eye highlight big -->
+  <ellipse cx="56.2" cy="54.5" rx="1.6" ry="1.3" fill="white"/>
+  <!-- Right eye highlight small -->
+  <circle cx="59.5" cy="58.2" r="0.7" fill="white" opacity="0.7"/>
+  <!-- Right lower lash line -->
+  <path d="M52.5 57.5 Q58 61 63.5 57.5" stroke="#181818" stroke-width="0.8" fill="none"/>
+  <!-- Right upper lash -->
+  <path d="M52.5 54.8 Q58 51.5 63.5 54.8" stroke="#181818" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+  <!-- Nose small -->
+  <path d="M48.5 66 Q50 67.5 51.5 66" stroke="#d4956a" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+  <!-- Mouth cute slightly open (surprised look like image) -->
+  <path d="M44 70 Q50 74 56 70" stroke="#c06040" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <ellipse cx="50" cy="71.5" rx="3.5" ry="2" fill="#c06040" opacity="0.4"/>
+
+  <!-- Blush left -->
+  <ellipse cx="35" cy="64" rx="5" ry="2.5" fill="#ff9090" opacity="0.35"/>
+  <!-- Blush right -->
+  <ellipse cx="65" cy="64" rx="5" ry="2.5" fill="#ff9090" opacity="0.35"/>
+
+</svg></div>
   </div>
   <h1><span class="name"><span class="jl" data-w="Json">J</span>.<span class="jl" data-w="Understandable">U</span>.<span class="jl" data-w="Language">L</span>.<span class="jl" data-w="Intelligence">I</span>.<span class="jl" data-w="Engine">E</span></span> AI</h1>
   <div class="arr">→ &nbsp; ARRIVING SOON</div>
