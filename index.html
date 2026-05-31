@@ -2,1224 +2,307 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>JULIE AI — Arriving Soon | Cosmohentorq</title>
-<meta name="description" content="JULIE AI — The world's first truly personalised AI that works without APIs or tokens. Own your AI. Arriving soon from Cosmohentorq."/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Julie AI — Arriving Soon | Cosmohentorq</title>
+<meta name="description" content="Julie AI — Own your AI. No APIs, no tokens, no Big Tech. Arriving soon from Cosmohentorq."/>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&family=Space+Grotesk:wght@300;400;600&display=swap');
-
-  :root {
-    --neon-blue: #00f5ff;
-    --neon-purple: #bf00ff;
-    --neon-pink: #ff0080;
-    --neon-green: #00ff88;
-    --neon-gold: #ffd700;
-    --bg: #020008;
-    --surface: rgba(255,255,255,0.03);
-    --border: rgba(0,245,255,0.15);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: #fff;
-    font-family: 'Space Grotesk', sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  /* ── CANVAS ── */
-  #stars-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 3rem;
-    background: rgba(2,0,8,0.7);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 1.1rem;
-    letter-spacing: 0.15em;
-    color: var(--neon-blue);
-    text-shadow: 0 0 20px var(--neon-blue);
-  }
-
-  .nav-logo span { color: var(--neon-purple); }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover { color: var(--neon-blue); }
-
-  /* ── HERO ── */
-  #hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 6rem 2rem 4rem;
-    overflow: hidden;
-  }
-
-  /* Glowing orb behind */
-  .hero-orb {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(191,0,255,0.12) 0%, rgba(0,245,255,0.06) 40%, transparent 70%);
-    animation: pulse-orb 4s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  @keyframes pulse-orb {
-    0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.8; }
-    50% { transform: translate(-50%,-50%) scale(1.1); opacity: 1; }
-  }
-
-  /* Neon ring */
-  .ring-outer {
-    position: relative;
-    width: 280px; height: 280px;
-    margin-bottom: 3rem;
-  }
-
-  .ring-outer::before, .ring-outer::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    animation: spin-ring 6s linear infinite;
-  }
-
-  .ring-outer::before {
-    inset: 0;
-    border-top-color: var(--neon-blue);
-    border-right-color: var(--neon-blue);
-    box-shadow: 0 0 30px var(--neon-blue), inset 0 0 30px rgba(0,245,255,0.1);
-  }
-
-  .ring-outer::after {
-    inset: 20px;
-    border-bottom-color: var(--neon-purple);
-    border-left-color: var(--neon-purple);
-    animation-direction: reverse;
-    animation-duration: 4s;
-    box-shadow: 0 0 20px var(--neon-purple), inset 0 0 20px rgba(191,0,255,0.1);
-  }
-
-  @keyframes spin-ring {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .ring-inner {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .ring-inner-circle {
-    width: 180px; height: 180px;
-    border-radius: 50%;
-    border: 1px solid rgba(0,245,255,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle, rgba(0,245,255,0.08), rgba(191,0,255,0.05), transparent);
-    box-shadow: 0 0 60px rgba(0,245,255,0.15), inset 0 0 40px rgba(191,0,255,0.1);
-    animation: glow-circle 3s ease-in-out infinite;
-  }
-
-  @keyframes glow-circle {
-    0%, 100% { box-shadow: 0 0 40px rgba(0,245,255,0.15), inset 0 0 30px rgba(191,0,255,0.1); }
-    50% { box-shadow: 0 0 80px rgba(0,245,255,0.35), inset 0 0 60px rgba(191,0,255,0.2); }
-  }
-
-  .j-logo {
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 3.5rem;
-    color: var(--neon-blue);
-    text-shadow:
-      0 0 10px var(--neon-blue),
-      0 0 30px var(--neon-blue),
-      0 0 60px rgba(0,245,255,0.5);
-    animation: flicker 5s ease-in-out infinite;
-  }
-
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    92% { opacity: 1; }
-    93% { opacity: 0.8; }
-    94% { opacity: 1; }
-    96% { opacity: 0.7; }
-    97% { opacity: 1; }
-  }
-
-  /* Small ring 3 */
-  .ring-3 {
-    position: absolute;
-    inset: -30px;
-    border-radius: 50%;
-    border: 1px dashed rgba(255,0,128,0.25);
-    animation: spin-ring 12s linear infinite;
-  }
-
-  /* Dots on rings */
-  .ring-dot {
-    position: absolute;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--neon-pink);
-    box-shadow: 0 0 10px var(--neon-pink);
-    top: 0; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(0,245,255,0.07);
-    border: 1px solid rgba(0,245,255,0.3);
-    border-radius: 50px;
-    padding: 0.4rem 1.2rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--neon-blue);
-    margin-bottom: 1.5rem;
-  }
-
-  .badge-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--neon-green);
-    box-shadow: 0 0 8px var(--neon-green);
-    animation: blink 1.5s ease-in-out infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
-  }
-
-  h1 {
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.5rem;
-  }
-
-  .title-julie {
-    display: block;
-    background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 50%, var(--neon-pink) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 30px rgba(0,245,255,0.4));
-    animation: gradient-shift 4s ease-in-out infinite;
-    background-size: 200% 200%;
-  }
-
-  @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  .title-ai {
-    display: block;
-    font-size: 0.5em;
-    letter-spacing: 0.6em;
-    color: rgba(255,255,255,0.5);
-    -webkit-text-fill-color: rgba(255,255,255,0.5);
-    margin-top: 0.3em;
-  }
-
-  .hero-arrow {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    color: var(--neon-pink);
-    margin: 0.5rem 0;
-    animation: arrow-pulse 2s ease-in-out infinite;
-    display: block;
-    font-family: 'Orbitron', monospace;
-    letter-spacing: 0.1em;
-  }
-
-  @keyframes arrow-pulse {
-    0%, 100% { text-shadow: 0 0 10px var(--neon-pink); transform: scale(1); }
-    50% { text-shadow: 0 0 30px var(--neon-pink), 0 0 60px rgba(255,0,128,0.4); transform: scale(1.03); }
-  }
-
-  .arriving-text {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 3.5rem);
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #fff;
-    text-shadow: 0 0 40px rgba(255,255,255,0.3);
-    margin-bottom: 0.5rem;
-  }
-
-  .hero-sub {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
-  }
-
-  /* CTA */
-  .cta-group {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 3rem;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-    color: #000;
-    font-family: 'Orbitron', monospace;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    padding: 0.9rem 2.2rem;
-    border-radius: 50px;
-    text-decoration: none;
-    box-shadow: 0 0 30px rgba(0,245,255,0.4), 0 0 60px rgba(191,0,255,0.2);
-    transition: all 0.3s ease;
-    animation: btn-glow 3s ease-in-out infinite;
-  }
-
-  @keyframes btn-glow {
-    0%, 100% { box-shadow: 0 0 30px rgba(0,245,255,0.4), 0 0 60px rgba(191,0,255,0.2); }
-    50% { box-shadow: 0 0 50px rgba(0,245,255,0.7), 0 0 100px rgba(191,0,255,0.4); }
-  }
-
-  .btn-primary:hover { transform: translateY(-3px) scale(1.03); }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: transparent;
-    color: var(--neon-green);
-    font-family: 'Orbitron', monospace;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    padding: 0.9rem 2.2rem;
-    border-radius: 50px;
-    text-decoration: none;
-    border: 1px solid var(--neon-green);
-    box-shadow: 0 0 20px rgba(0,255,136,0.2);
-    transition: all 0.3s ease;
-  }
-
-  .btn-secondary:hover {
-    background: rgba(0,255,136,0.08);
-    box-shadow: 0 0 40px rgba(0,255,136,0.4);
-    transform: translateY(-3px);
-  }
-
-  /* Scroll indicator */
-  .scroll-hint {
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    color: rgba(255,255,255,0.25);
-    text-transform: uppercase;
-    animation: float 2.5s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
-  }
-
-  /* ── SECTIONS SHARED ── */
-  section {
-    position: relative;
-    z-index: 1;
-    padding: 6rem 2rem;
-  }
-
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    display: inline-block;
-    font-size: 0.7rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--neon-blue);
-    margin-bottom: 0.75rem;
-    border-left: 2px solid var(--neon-blue);
-    padding-left: 0.75rem;
-  }
-
-  .section-title {
-    font-family: 'Orbitron', monospace;
-    font-weight: 700;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .section-title .highlight {
-    color: var(--neon-blue);
-    text-shadow: 0 0 20px rgba(0,245,255,0.5);
-  }
-
-  .section-desc {
-    font-size: 1.05rem;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.8;
-    max-width: 600px;
-  }
-
-  /* Divider */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
-    margin: 0;
-    opacity: 0.3;
-  }
-
-  /* ── DIFFERENCE SECTION ── */
-  #different { background: rgba(0,245,255,0.015); }
-
-  .diff-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .diff-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .diff-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .diff-card:hover::before { opacity: 1; }
-  .diff-card:hover {
-    border-color: rgba(0,245,255,0.35);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,245,255,0.08);
-  }
-
-  .diff-icon {
-    width: 52px; height: 52px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .icon-blue { background: rgba(0,245,255,0.1); border: 1px solid rgba(0,245,255,0.2); }
-  .icon-purple { background: rgba(191,0,255,0.1); border: 1px solid rgba(191,0,255,0.2); }
-  .icon-pink { background: rgba(255,0,128,0.1); border: 1px solid rgba(255,0,128,0.2); }
-  .icon-green { background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.2); }
-  .icon-gold { background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.2); }
-  .icon-orange { background: rgba(255,140,0,0.1); border: 1px solid rgba(255,140,0,0.2); }
-
-  .diff-card h3 {
-    font-family: 'Orbitron', monospace;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.75rem;
-    color: #fff;
-  }
-
-  .diff-card p {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.7;
-  }
-
-  /* ── NOT LIKE OTHERS ── */
-  #notlike {
-    text-align: center;
-  }
-
-  .not-like-box {
-    max-width: 780px;
-    margin: 3rem auto 0;
-    background: linear-gradient(135deg, rgba(0,245,255,0.04), rgba(191,0,255,0.04));
-    border: 1px solid rgba(0,245,255,0.15);
-    border-radius: 24px;
-    padding: 3.5rem 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .not-like-box::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(0,245,255,0.08), transparent 70%);
-    pointer-events: none;
-  }
-
-  .not-like-bigtext {
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: clamp(1.3rem, 3vw, 2rem);
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-    color: #fff;
-  }
-
-  .not-like-bigtext .accent { color: var(--neon-blue); text-shadow: 0 0 20px rgba(0,245,255,0.5); }
-  .not-like-bigtext .accent2 { color: var(--neon-pink); text-shadow: 0 0 20px rgba(255,0,128,0.4); }
-
-  .tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
-    margin-top: 2rem;
-  }
-
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    font-weight: 600;
-  }
-
-  .tag-no {
-    background: rgba(255,0,80,0.1);
-    border: 1px solid rgba(255,0,80,0.3);
-    color: #ff4466;
-  }
-
-  .tag-yes {
-    background: rgba(0,255,136,0.08);
-    border: 1px solid rgba(0,255,136,0.3);
-    color: var(--neon-green);
-  }
-
-  /* ── INVESTOR SECTION ── */
-  #investors { background: rgba(255,215,0,0.015); }
-
-  .investor-card {
-    max-width: 700px;
-    margin: 3rem auto 0;
-    background: linear-gradient(135deg, rgba(255,215,0,0.06), rgba(255,140,0,0.03));
-    border: 1px solid rgba(255,215,0,0.2);
-    border-radius: 20px;
-    padding: 3rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .investor-card::after {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: conic-gradient(transparent 0deg, rgba(255,215,0,0.04) 60deg, transparent 120deg);
-    animation: spin-slow 10s linear infinite;
-    pointer-events: none;
-  }
-
-  @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .investor-avatar {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--neon-gold), #ff8c00);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 1.8rem;
-    color: #000;
-    margin: 0 auto 1.5rem;
-    box-shadow: 0 0 40px rgba(255,215,0,0.4);
-    position: relative;
-    z-index: 1;
-  }
-
-  .investor-name {
-    font-family: 'Orbitron', monospace;
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: var(--neon-gold);
-    text-shadow: 0 0 20px rgba(255,215,0,0.4);
-    margin-bottom: 0.4rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .investor-title {
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,215,0,0.5);
-    margin-bottom: 1.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .investment-amount {
-    display: inline-block;
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 2.5rem;
-    color: var(--neon-gold);
-    text-shadow: 0 0 30px rgba(255,215,0,0.5);
-    margin-bottom: 0.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .investment-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .next-up-box {
-    background: rgba(0,245,255,0.06);
-    border: 1px dashed rgba(0,245,255,0.3);
-    border-radius: 14px;
-    padding: 1.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .next-up-box p {
-    font-family: 'Orbitron', monospace;
-    font-size: 0.9rem;
-    color: var(--neon-blue);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-  }
-
-  .next-up-box small {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.4);
-  }
-
-  /* ── PREBOOK ── */
-  #prebook {
-    text-align: center;
-    background: rgba(191,0,255,0.02);
-  }
-
-  .prebook-box {
-    max-width: 620px;
-    margin: 3rem auto 0;
-  }
-
-  .prebook-counter {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
-    flex-wrap: wrap;
-  }
-
-  .counter-unit {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(0,245,255,0.15);
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    min-width: 80px;
-  }
-
-  .counter-num {
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 2rem;
-    color: var(--neon-blue);
-    text-shadow: 0 0 20px rgba(0,245,255,0.5);
-    display: block;
-  }
-
-  .counter-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-  }
-
-  .prebook-form {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .prebook-input {
-    flex: 1;
-    min-width: 200px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 50px;
-    padding: 0.85rem 1.5rem;
-    color: #fff;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-
-  .prebook-input::placeholder { color: rgba(255,255,255,0.25); }
-
-  .prebook-input:focus {
-    border-color: rgba(0,245,255,0.5);
-    box-shadow: 0 0 20px rgba(0,245,255,0.1);
-  }
-
-  .prebook-note {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 0.05em;
-  }
-
-  /* ── CONTACT ── */
-  #contact { text-align: center; }
-
-  .contact-cards {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 3rem;
-  }
-
-  .contact-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.8rem 2.2rem;
-    text-align: center;
-    transition: all 0.3s;
-    text-decoration: none;
-    color: inherit;
-    min-width: 200px;
-  }
-
-  .contact-card:hover {
-    border-color: rgba(0,245,255,0.4);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,245,255,0.08);
-  }
-
-  .contact-icon {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-
-  .contact-card h4 {
-    font-family: 'Orbitron', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.4);
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .contact-card p {
-    font-size: 0.9rem;
-    color: var(--neon-blue);
-  }
-
-  .whatsapp-card { border-color: rgba(0,255,136,0.2); }
-  .whatsapp-card:hover { border-color: rgba(0,255,136,0.5); box-shadow: 0 20px 60px rgba(0,255,136,0.08); }
-  .whatsapp-card p { color: var(--neon-green); }
-
-  /* ── FOOTER ── */
-  footer {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 3rem 2rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .footer-logo {
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 1.2rem;
-    letter-spacing: 0.2em;
-    margin-bottom: 0.75rem;
-  }
-
-  .footer-logo .blue { color: var(--neon-blue); }
-  .footer-logo .purple { color: var(--neon-purple); }
-
-  footer p {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.25);
-    letter-spacing: 0.1em;
-  }
-
-  .footer-tagline {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.2);
-    margin-top: 0.5rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  /* ── FLOATING PARTICLES ── */
-  .particle {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    animation: drift linear infinite;
-    opacity: 0;
-  }
-
-  @keyframes drift {
-    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100px) translateX(60px); opacity: 0; }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 640px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    section { padding: 4rem 1.5rem; }
-    .not-like-box { padding: 2rem 1.5rem; }
-    .investor-card { padding: 2rem 1.5rem; }
-    .prebook-form { flex-direction: column; }
-    .ring-outer { width: 220px; height: 220px; }
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05080f;--s1:#0b1020;--s2:#101828;--s3:#141e30;
+  --acc:#00d4aa;--blue:#3d7eff;--gold:#f5a623;--red:#ff4d5e;
+  --t1:#dde6f2;--t2:#7a90aa;--t3:#3a5068;
+  --b1:rgba(255,255,255,.05);--b2:rgba(255,255,255,.09);--b3:rgba(255,255,255,.04)
+}
+body{background:var(--bg);color:var(--t1);font-family:'DM Sans','Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+
+/* ── NAV ── */
+nav{padding:12px 24px;background:var(--s1);border-bottom:0.5px solid var(--b2);display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50}
+.nav-logo{font-size:15px;font-weight:700;letter-spacing:1px;color:var(--acc);margin-right:auto;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:var(--t2);font-weight:400;font-size:13px;letter-spacing:.5px}
+.nav-link{font-size:12px;color:var(--t2);padding:5px 12px;border-radius:20px;border:0.5px solid transparent;text-decoration:none;transition:.2s}
+.nav-link:hover{border-color:var(--b2);color:var(--t1)}
+.nav-cta{font-size:12px;font-weight:600;color:var(--bg);background:var(--acc);padding:6px 16px;border-radius:20px;text-decoration:none;transition:.2s;letter-spacing:.3px}
+.nav-cta:hover{filter:brightness(1.1)}
+
+/* ── HERO ── */
+.hero{max-width:760px;margin:0 auto;padding:80px 24px 64px;text-align:center;flex:0}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--acc);margin-bottom:28px;background:rgba(0,212,170,.07);border:0.5px solid rgba(0,212,170,.2);padding:5px 14px;border-radius:20px}
+.tag-dot{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.logo-ring{width:80px;height:80px;border-radius:50%;border:1.5px solid rgba(0,212,170,.35);background:rgba(0,212,170,.05);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;position:relative}
+.logo-ring::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:0.5px solid rgba(0,212,170,.12);animation:spin 12s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.logo-ring-inner{font-size:28px;color:var(--acc)}
+
+h1{font-size:clamp(36px,7vw,64px);font-weight:700;letter-spacing:-1px;line-height:1.05;margin-bottom:10px}
+h1 .name{color:var(--acc)}
+.arrow-line{font-size:clamp(14px,2.5vw,20px);color:var(--t3);letter-spacing:3px;font-weight:400;margin-bottom:20px}
+.hero-sub{font-size:16px;color:var(--t2);line-height:1.7;max-width:520px;margin:0 auto 40px}
+
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:var(--bg);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:.3px;transition:.2s}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--t1);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;border:0.5px solid var(--b2);transition:.2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.2);background:var(--b1)}
+
+.footer-hint{font-size:12px;color:var(--t3);letter-spacing:.3px}
+
+/* ── SECTIONS ── */
+.wrap{max-width:800px;margin:0 auto;padding:0 24px}
+section{padding:60px 0;border-top:0.5px solid var(--b1)}
+.sec-tag{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
+.sec-title{font-size:26px;font-weight:700;letter-spacing:-.3px;margin-bottom:8px}
+.sec-sub{font-size:15px;color:var(--t2);line-height:1.7;margin-bottom:32px;max-width:540px}
+
+/* ── DIFFERENCE GRID ── */
+.diff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.diff-card{background:var(--s1);border:0.5px solid var(--b2);border-radius:14px;padding:22px;transition:.2s}
+.diff-card:hover{border-color:rgba(0,212,170,.2);background:var(--s2)}
+.diff-icon{width:36px;height:36px;border-radius:9px;background:rgba(0,212,170,.08);border:0.5px solid rgba(0,212,170,.15);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:14px}
+.diff-card h3{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--t1)}
+.diff-card p{font-size:13px;color:var(--t2);line-height:1.6}
+
+/* ── NO / YES TAGS ── */
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tag{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.2px}
+.tag-no{background:rgba(255,77,94,.07);border:0.5px solid rgba(255,77,94,.2);color:#ff6b7a}
+.tag-yes{background:rgba(0,212,170,.07);border:0.5px solid rgba(0,212,170,.2);color:var(--acc)}
+
+/* ── INVESTOR ── */
+.investor-card{background:var(--s1);border:0.5px solid rgba(245,166,35,.2);border-radius:16px;padding:32px;display:flex;gap:24px;align-items:flex-start}
+.inv-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#e8890a);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#000;flex-shrink:0}
+.inv-name{font-size:17px;font-weight:700;margin-bottom:3px}
+.inv-role{font-size:12px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px}
+.inv-amount{font-size:28px;font-weight:700;color:var(--gold);letter-spacing:-.5px;margin-bottom:3px}
+.inv-label{font-size:12px;color:var(--t3);margin-bottom:20px}
+.inv-next{background:var(--b3);border:0.5px solid var(--b2);border-radius:10px;padding:14px 16px}
+.inv-next p{font-size:13px;color:var(--t2);line-height:1.6}
+.inv-next a{color:var(--acc);text-decoration:none}
+.inv-next a:hover{text-decoration:underline}
+
+/* ── PREBOOK ── */
+.prebook-box{background:var(--s1);border:0.5px solid var(--b2);border-radius:16px;padding:36px}
+.countdown{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap}
+.cd-unit{background:var(--s2);border:0.5px solid var(--b2);border-radius:10px;padding:16px 20px;min-width:74px;text-align:center}
+.cd-num{font-size:28px;font-weight:700;color:var(--acc);display:block;letter-spacing:-1px;line-height:1}
+.cd-lbl{font-size:10px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.pb-form{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.pb-input{flex:1;min-width:200px;background:var(--s2);border:0.5px solid var(--b2);color:var(--t1);padding:13px 16px;border-radius:10px;font-size:14px;outline:none;transition:.2s;font-family:inherit}
+.pb-input:focus{border-color:rgba(0,212,170,.4)}
+.pb-input::placeholder{color:var(--t3)}
+.pb-note{font-size:12px;color:var(--t3)}
+#pb-msg{font-size:13px;color:var(--acc);margin-top:10px;min-height:20px}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.contact-card{background:var(--s1);border:0.5px solid var(--b2);border-radius:14px;padding:22px;text-decoration:none;color:inherit;transition:.2s;display:block}
+.contact-card:hover{border-color:rgba(0,212,170,.25);background:var(--s2)}
+.cc-icon{font-size:22px;margin-bottom:12px;display:block}
+.cc-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.cc-val{font-size:14px;color:var(--acc)}
+.contact-card.wa{border-color:rgba(0,212,170,.1)}
+.contact-card.wa .cc-val{color:#25d366}
+
+/* ── FOOTER ── */
+footer{margin-top:auto;padding:28px 24px;border-top:0.5px solid var(--b1);text-align:center}
+.footer-logo{font-size:14px;font-weight:700;letter-spacing:1px;color:var(--acc);margin-bottom:6px}
+footer p{font-size:12px;color:var(--t3);letter-spacing:.3px}
+
+@media(max-width:600px){
+  .hero{padding:56px 20px 48px}
+  .investor-card{flex-direction:column;gap:16px}
+  .prebook-box{padding:24px 20px}
+  .pb-form{flex-direction:column}
+  nav .nav-link{display:none}
+}
 </style>
 </head>
 <body>
 
-<canvas id="stars-canvas"></canvas>
-
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">COSMO<span>HENTORQ</span></div>
-  <ul class="nav-links">
-    <li><a href="#different">Why JULIE</a></li>
-    <li><a href="#investors">Investors</a></li>
-    <li><a href="#prebook">Pre-book</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-logo">✦ JULIE <span>by Cosmohentorq</span></div>
+  <a class="nav-link" href="#different">Why Julie</a>
+  <a class="nav-link" href="#investors">Investors</a>
+  <a class="nav-link" href="#contact">Contact</a>
+  <a class="nav-cta" href="#prebook">Pre-book →</a>
 </nav>
 
-<!-- ── HERO ── -->
-<section id="hero">
-  <div class="hero-orb"></div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag"><span class="tag-dot"></span>Cosmohentorq Labs · Classified</div>
+  <div class="logo-ring"><span class="logo-ring-inner">✦</span></div>
+  <h1><span class="name">JULIE</span> AI</h1>
+  <div class="arrow-line">→ ARRIVING SOON</div>
+  <p class="hero-sub">
+    Own your AI. No API keys. No per-token bills. No Big Tech middlemen.<br/>
+    Your AI, built and customised by the Cosmohentorq technical team.
+  </p>
+  <div class="btn-row">
+    <a href="#prebook" class="btn-primary">Reserve my slot</a>
+    <a href="https://wa.me/918754883872" target="_blank" class="btn-ghost">WhatsApp us</a>
+  </div>
+  <div class="footer-hint">100% LOCAL &nbsp;·&nbsp; ZERO CLOUD &nbsp;·&nbsp; ALWAYS ON</div>
+</div>
 
-  <!-- Neon ring cluster -->
-  <div class="ring-outer">
-    <div class="ring-3"><div class="ring-dot"></div></div>
-    <div class="ring-inner">
-      <div class="ring-inner-circle">
-        <span class="j-logo">J</span>
-      </div>
+<div class="wrap">
+
+  <!-- WHY JULIE -->
+  <section id="different">
+    <div class="sec-tag">What makes Julie different</div>
+    <div class="sec-title">Not just another AI.</div>
+    <div class="sec-sub">
+      Julie doesn't operate like ChatGPT, Gemini, or Copilot. There are no API handshakes,
+      no third-party token costs, no subscription to Big Tech pipelines. It's a completely
+      different method — Julie is yours.
     </div>
-  </div>
-
-  <div class="hero-badge">
-    <span class="badge-dot"></span>
-    Cosmohentorq Labs &mdash; Classified Project
-  </div>
-
-  <h1>
-    <span class="title-julie">JULIE</span>
-    <span class="title-ai">A R T I F I C I A L &nbsp; I N T E L L I G E N C E</span>
-  </h1>
-
-  <span class="hero-arrow">&#8594; ARRIVING SOON</span>
-
-  <p class="arriving-text">Pre-Book Your Slot Now</p>
-  <p class="hero-sub">From the Cosmos &bull; Cosmohentorq &bull; Est. 2024</p>
-
-  <div class="cta-group">
-    <a href="#prebook" class="btn-primary">&#9670; Reserve My Slot</a>
-    <a href="https://wa.me/918754883872" target="_blank" class="btn-secondary">&#9654; WhatsApp Us</a>
-  </div>
-
-  <p class="scroll-hint">&#9660; &nbsp; Discover the Difference &nbsp; &#9660;</p>
-</section>
-
-<div class="divider"></div>
-
-<!-- ── DIFFERENT ── -->
-<section id="different">
-  <div class="container">
-    <span class="section-label">What Makes JULIE Different</span>
-    <h2 class="section-title">Not Just Another AI.<br><span class="highlight">Completely Different.</span></h2>
-    <p class="section-desc">
-      JULIE is not built like ChatGPT, Gemini, or Copilot. There are no API handshakes, no third-party tokens,
-      no subscription to Big Tech pipelines. JULIE is a paradigm shift in how AI is deployed and owned.
-    </p>
 
     <div class="diff-grid">
       <div class="diff-card">
-        <div class="diff-icon icon-blue">&#128274;</div>
+        <div class="diff-icon">🔒</div>
         <h3>Zero API Dependency</h3>
-        <p>JULIE runs entirely on Cosmohentorq's own infrastructure. No OpenAI. No Gemini. No third-party token costs — ever.</p>
+        <p>No OpenAI. No Gemini. No third-party token costs. Julie runs on Cosmohentorq's own infrastructure — entirely.</p>
       </div>
       <div class="diff-card">
-        <div class="diff-icon icon-purple">&#127760;</div>
-        <h3>Your AI, Your Data</h3>
-        <p>Your interactions stay yours. JULIE is deployed in your environment — not in Big Tech's cloud where your data trains their next model.</p>
+        <div class="diff-icon">🌐</div>
+        <h3>Your Data Stays Yours</h3>
+        <p>Deployed in your environment. Not in Big Tech's cloud where your data trains their next model.</p>
       </div>
       <div class="diff-card">
-        <div class="diff-icon icon-pink">&#9881;</div>
+        <div class="diff-icon">⚙️</div>
         <h3>Deep Customisation</h3>
-        <p>Our technical team tailors JULIE to your brand, language, and workflow. Not a generic chatbot — a purpose-built AI assistant.</p>
+        <p>Our technical team tailors Julie to your brand, language, and workflow — not a generic chatbot.</p>
       </div>
       <div class="diff-card">
-        <div class="diff-icon icon-green">&#9889;</div>
+        <div class="diff-icon">⚡</div>
         <h3>Works for Free</h3>
-        <p>JULIE's core intelligence is not metered per call or per token. Once yours, it runs continuously — no monthly API bills.</p>
+        <p>Julie's intelligence is not metered per call or per token. Once yours, it runs continuously.</p>
       </div>
       <div class="diff-card">
-        <div class="diff-icon icon-gold">&#127881;</div>
-        <h3>Tamil &amp; Multilingual First</h3>
-        <p>Built from the ground up for Indian languages. Tamil, Tanglish, Hindi-English — JULIE speaks how real people speak.</p>
+        <div class="diff-icon">🗣️</div>
+        <h3>Tamil & Multilingual</h3>
+        <p>Built for Indian languages from day one. Tamil, Tanglish, Hindi-English — how real people speak.</p>
       </div>
       <div class="diff-card">
-        <div class="diff-icon icon-orange">&#128293;</div>
-        <h3>Voice-Native Intelligence</h3>
-        <p>JULIE hears, thinks, and speaks. Real-time voice interactions, not just text — making AI accessible beyond keyboards.</p>
+        <div class="diff-icon">🎙️</div>
+        <h3>Voice-Native</h3>
+        <p>Julie hears, thinks, and speaks. Real-time voice interactions — AI beyond the keyboard.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- ── NOT LIKE OTHERS ── -->
-<section id="notlike">
-  <div class="container">
-    <span class="section-label">The JULIE Promise</span>
-    <h2 class="section-title">JULIE Does Not<br><span class="highlight">Do Business Like Others</span></h2>
-
-    <div class="not-like-box">
-      <p class="not-like-bigtext">
-        While others <span class="accent2">sell you access</span> to their AI —<br/>
-        <span class="accent">JULIE gives you ownership.</span>
-      </p>
-      <p style="color:rgba(255,255,255,0.55); font-size:0.95rem; line-height:1.9; position:relative; z-index:1;">
-        Every major AI today is a black box subscription. You pay per message, per token, per month —
-        and the moment you stop paying, your AI stops working. JULIE flips this entirely.
-        Cosmohentorq's team deploys, fine-tunes, and hands over a private AI to you —
-        running on architecture we built from scratch. No middlemen. No recurring fees. No data leaks to Silicon Valley.
-      </p>
-
-      <div class="tag-row">
-        <span class="tag tag-no">&#10007; No OpenAI APIs</span>
-        <span class="tag tag-no">&#10007; No Per-Token Billing</span>
-        <span class="tag tag-no">&#10007; No Big Tech Lock-in</span>
-        <span class="tag tag-no">&#10007; No Data Sharing</span>
-        <span class="tag tag-yes">&#10003; Own Your AI</span>
-        <span class="tag tag-yes">&#10003; One-Time Setup</span>
-        <span class="tag tag-yes">&#10003; Private &amp; Secure</span>
-        <span class="tag tag-yes">&#10003; Custom Voice &amp; Brain</span>
-      </div>
+    <div class="tag-row">
+      <span class="tag tag-no">✗ No OpenAI APIs</span>
+      <span class="tag tag-no">✗ No Per-Token Billing</span>
+      <span class="tag tag-no">✗ No Big Tech Lock-in</span>
+      <span class="tag tag-no">✗ No Data Sharing</span>
+      <span class="tag tag-yes">✓ Own Your AI</span>
+      <span class="tag tag-yes">✓ One-Time Setup</span>
+      <span class="tag tag-yes">✓ Private & Secure</span>
+      <span class="tag tag-yes">✓ Custom Voice & Brain</span>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
-
-<!-- ── INVESTORS ── -->
-<section id="investors">
-  <div class="container">
-    <div style="text-align:center">
-      <span class="section-label">Investors &amp; Believers</span>
-      <h2 class="section-title">Those Who Saw<br><span class="highlight">The Vision First</span></h2>
-      <p class="section-desc" style="margin:0 auto 0; text-align:center;">
-        Before the product. Before the launch. These are the minds that backed the mission.
-      </p>
-    </div>
+  <!-- INVESTORS -->
+  <section id="investors">
+    <div class="sec-tag">Investors &amp; Believers</div>
+    <div class="sec-title">Those who saw the vision first.</div>
+    <div class="sec-sub">Before the product. Before the launch. These are the minds that backed the mission.</div>
 
     <div class="investor-card">
-      <div class="investor-avatar">A</div>
-      <div class="investor-name">Adityaa Venkataraman</div>
-      <div class="investor-title">Founding Investor &bull; Cosmohentorq</div>
-      <div class="investment-amount">&#8377; 41,500</div>
-      <div class="investment-label">Invested in Cosmohentorq so far</div>
-
-      <div class="next-up-box">
-        <p>&#8594; &nbsp; Next Investor Could Be You</p>
-        <small>JULIE is pre-revenue and pre-launch. Early believers get the best terms.<br/>
-        Reach us at <a href="mailto:apex@cosmohentorq.com" style="color:var(--neon-blue); text-decoration:none;">apex@cosmohentorq.com</a> to discuss.</small>
+      <div class="inv-avatar">A</div>
+      <div style="flex:1">
+        <div class="inv-name">Adityaa Venkataraman</div>
+        <div class="inv-role">Founding Investor · Cosmohentorq</div>
+        <div class="inv-amount">₹41,500</div>
+        <div class="inv-label">Invested in Cosmohentorq so far</div>
+        <div class="inv-next">
+          <p>
+            <strong style="color:var(--t1)">Next investor could be you.</strong><br/>
+            Julie is pre-revenue and pre-launch. Early believers get the best terms.
+            Reach us at <a href="mailto:apex@cosmohentorq.com">apex@cosmohentorq.com</a> to discuss.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
-
-<!-- ── PREBOOK ── -->
-<section id="prebook">
-  <div class="container">
-    <span class="section-label">Early Access</span>
-    <h2 class="section-title">Pre-Book Your <span class="highlight">JULIE Slot</span></h2>
-    <p class="section-desc" style="margin: 0 auto 0; text-align:center; max-width:500px;">
-      JULIE launches with limited early-access deployments. Pre-book now to secure your place in the first rollout.
-    </p>
+  <!-- PREBOOK -->
+  <section id="prebook">
+    <div class="sec-tag">Early Access</div>
+    <div class="sec-title">Pre-book your Julie slot.</div>
+    <div class="sec-sub">Limited early-access deployments. Pre-book now to secure your place in the first rollout.</div>
 
     <div class="prebook-box">
-      <!-- Countdown -->
-      <div class="prebook-counter">
-        <div class="counter-unit">
-          <span class="counter-num" id="cd-days">--</span>
-          <span class="counter-label">Days</span>
-        </div>
-        <div class="counter-unit">
-          <span class="counter-num" id="cd-hours">--</span>
-          <span class="counter-label">Hours</span>
-        </div>
-        <div class="counter-unit">
-          <span class="counter-num" id="cd-mins">--</span>
-          <span class="counter-label">Mins</span>
-        </div>
-        <div class="counter-unit">
-          <span class="counter-num" id="cd-secs">--</span>
-          <span class="counter-label">Secs</span>
-        </div>
+      <div class="countdown">
+        <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><div class="cd-lbl">Days</div></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><div class="cd-lbl">Hours</div></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><div class="cd-lbl">Mins</div></div>
+        <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><div class="cd-lbl">Secs</div></div>
       </div>
-
-      <!-- Form -->
-      <form class="prebook-form" onsubmit="handlePrebook(event)">
-        <input type="email" class="prebook-input" placeholder="your@email.com" required id="prebook-email"/>
-        <button type="submit" class="btn-primary" style="border:none; cursor:pointer; white-space:nowrap;">
-          &#9670; Book My Slot
-        </button>
+      <form class="pb-form" onsubmit="handleBook(event)">
+        <input class="pb-input" type="email" id="pb-email" placeholder="your@email.com" required/>
+        <button type="submit" class="btn-primary" style="border:none;cursor:pointer;white-space:nowrap">Book my slot →</button>
       </form>
-      <p class="prebook-note" id="prebook-msg">&#128274; &nbsp;Your info stays private. No spam. Just launch updates.</p>
+      <div class="pb-note">Your info stays private. No spam. Just launch updates.</div>
+      <div id="pb-msg"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sec-tag">Get in touch</div>
+    <div class="sec-title">Reach the Cosmohentorq team.</div>
+    <div class="sec-sub">Whether you're an investor, early adopter, or just curious — we'd love to hear from you.</div>
 
-<!-- ── CONTACT ── -->
-<section id="contact">
-  <div class="container">
-    <span class="section-label">Get In Touch</span>
-    <h2 class="section-title">Reach the <span class="highlight">Cosmohentorq Team</span></h2>
-    <p class="section-desc" style="margin:0 auto; text-align:center;">
-      Whether you're a potential investor, early adopter, or just curious — we'd love to hear from you.
-    </p>
-
-    <div class="contact-cards">
+    <div class="contact-grid">
       <a href="mailto:labs@cosmohentorq.com" class="contact-card">
-        <span class="contact-icon">&#128300;</span>
-        <h4>Research &amp; Labs</h4>
-        <p>labs@cosmohentorq.com</p>
+        <span class="cc-icon">🔬</span>
+        <div class="cc-label">Research &amp; Labs</div>
+        <div class="cc-val">labs@cosmohentorq.com</div>
       </a>
       <a href="mailto:apex@cosmohentorq.com" class="contact-card">
-        <span class="contact-icon">&#128201;</span>
-        <h4>Investments &amp; Business</h4>
-        <p>apex@cosmohentorq.com</p>
+        <span class="cc-icon">📈</span>
+        <div class="cc-label">Investments &amp; Business</div>
+        <div class="cc-val">apex@cosmohentorq.com</div>
       </a>
-      <a href="https://wa.me/918754883872" target="_blank" class="contact-card whatsapp-card">
-        <span class="contact-icon">&#128241;</span>
-        <h4>WhatsApp Direct</h4>
-        <p>+91 87548 83872</p>
+      <a href="https://wa.me/918754883872" target="_blank" class="contact-card wa">
+        <span class="cc-icon">💬</span>
+        <div class="cc-label">WhatsApp Direct</div>
+        <div class="cc-val">+91 87548 83872</div>
       </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── FOOTER ── -->
+</div><!-- /wrap -->
+
 <footer>
-  <div class="footer-logo">
-    <span class="blue">COSMO</span><span class="purple">HENTORQ</span>
-  </div>
-  <p>&copy; 2026 Cosmohentorq Innovations. All rights reserved.</p>
-  <p class="footer-tagline">JULIE &mdash; Arriving Soon &mdash; Redefining AI Ownership</p>
+  <div class="footer-logo">✦ JULIE &nbsp;·&nbsp; COSMOHENTORQ</div>
+  <p>© 2026 Cosmohentorq Innovations. All rights reserved.</p>
+  <p style="margin-top:4px">Julie — Arriving Soon &nbsp;·&nbsp; Redefining AI Ownership</p>
 </footer>
 
-<!-- ── SCRIPTS ── -->
 <script>
-// ── STARFIELD ──
-const canvas = document.getElementById('stars-canvas');
-const ctx = canvas.getContext('2d');
-
-let W, H, stars = [];
-
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-  initStars();
+// Countdown — 90 days from now
+const target = new Date(Date.now() + 90*24*60*60*1000);
+function tick(){
+  const d = target - Date.now();
+  if(d <= 0) return;
+  document.getElementById('cd-d').textContent = String(Math.floor(d/864e5)).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(Math.floor(d%864e5/36e5)).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(Math.floor(d%36e5/6e4)).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(Math.floor(d%6e4/1e3)).padStart(2,'0');
 }
+setInterval(tick,1000); tick();
 
-function initStars() {
-  stars = [];
-  const count = Math.floor(W * H / 4000);
-  for (let i = 0; i < count; i++) {
-    stars.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 1.4 + 0.2,
-      a: Math.random(),
-      da: (Math.random() - 0.5) * 0.008,
-      color: Math.random() > 0.85 ? '#00f5ff' : Math.random() > 0.7 ? '#bf00ff' : '#ffffff',
-    });
-  }
-}
-
-function drawStars() {
-  ctx.clearRect(0, 0, W, H);
-  for (const s of stars) {
-    s.a += s.da;
-    if (s.a > 1) { s.a = 1; s.da = -Math.abs(s.da); }
-    if (s.a < 0.05) { s.a = 0.05; s.da = Math.abs(s.da); }
-    ctx.globalAlpha = s.a;
-    ctx.fillStyle = s.color;
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(drawStars);
-}
-
-window.addEventListener('resize', resize);
-resize();
-drawStars();
-
-// ── COUNTDOWN ── (target: 90 days from now)
-const target = new Date();
-target.setDate(target.getDate() + 90);
-
-function updateCountdown() {
-  const diff = target - Date.now();
-  if (diff <= 0) return;
-  const d = Math.floor(diff / 864e5);
-  const h = Math.floor((diff % 864e5) / 36e5);
-  const m = Math.floor((diff % 36e5) / 6e4);
-  const s = Math.floor((diff % 6e4) / 1e3);
-  document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
-  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-  document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
-  document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// ── PREBOOK FORM ──
-function handlePrebook(e) {
+// Prebook
+function handleBook(e){
   e.preventDefault();
-  const email = document.getElementById('prebook-email').value;
-  const msg = document.getElementById('prebook-msg');
-  msg.style.color = '#00ff88';
-  msg.textContent = '✓  Slot reserved for ' + email + '! We will reach out before launch.';
-  document.getElementById('prebook-email').value = '';
-
-  // WhatsApp redirect with email prefilled
-  const wa = 'https://wa.me/918754883872?text=Hi%20Cosmohentorq%2C%20I%20want%20to%20pre-book%20a%20JULIE%20slot.%20My%20email%3A%20' + encodeURIComponent(email);
-  setTimeout(() => window.open(wa, '_blank'), 1200);
+  const email = document.getElementById('pb-email').value;
+  document.getElementById('pb-msg').textContent = '✓  Slot reserved for ' + email + '. We'll reach out before launch.';
+  document.getElementById('pb-email').value = '';
+  setTimeout(()=> window.open('https://wa.me/918754883872?text=Hi%20Cosmohentorq%2C%20I%20want%20to%20pre-book%20a%20JULIE%20slot.%20My%20email%3A%20'+encodeURIComponent(email),'_blank'), 1000);
 }
-
-// ── SCROLL REVEAL ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.diff-card, .not-like-box, .investor-card, .contact-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(30px)';
-  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  observer.observe(el);
-});
 </script>
-
 </body>
 </html>
