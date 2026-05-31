@@ -71,18 +71,12 @@ nav{position:sticky;top:0;z-index:100;padding:0 20px;height:52px;background:rgba
 .odot2{width:4px;height:4px;background:var(--blue);animation:orb 9s linear infinite reverse;animation-delay:-3s;margin:-2px 0 0 -2px}
 @keyframes orb{0%{transform:rotate(0deg) translateX(43px)}100%{transform:rotate(360deg) translateX(43px)}}
 
-/* Julie acronym title */
-.julie-title{display:flex;align-items:baseline;justify-content:center;flex-wrap:nowrap;font-size:clamp(34px,9vw,64px);font-weight:700;line-height:1.02;margin-bottom:10px;gap:0}
-.jl-grp{display:inline-flex;align-items:baseline;white-space:nowrap}
-.jl-letter{color:var(--acc);flex-shrink:0}
-.jl-rest{display:inline-block;max-width:0;overflow:hidden;opacity:0;color:var(--acc);transition:max-width .45s cubic-bezier(.4,0,.2,1),opacity .35s ease,letter-spacing .4s ease;letter-spacing:-.05em;vertical-align:baseline;white-space:nowrap}
-.jl-grp.open .jl-rest{max-width:400px;opacity:1;letter-spacing:-.03em}
-.jl-sep{color:var(--acc);transition:opacity .25s ease,max-width .35s ease,margin .35s ease;opacity:1;margin:0 1px;flex-shrink:0}
-.jl-grp.open+.jl-sep,.jl-grp.open .jl-sep{opacity:0;max-width:0;overflow:hidden;margin:0}
-.jl-sep-space{display:inline-block;max-width:0;overflow:hidden;opacity:0;transition:max-width .35s ease .15s,opacity .3s ease .15s}
-.jl-grp.open .jl-sep-space{max-width:18px;opacity:1}
-.jl-ai{color:var(--t1);margin-left:8px;font-size:.55em;letter-spacing:.1em;align-self:flex-end;padding-bottom:.12em;flex-shrink:0}
+h1{font-size:clamp(34px,9vw,64px);font-weight:700;letter-spacing:-1.5px;line-height:1.02;margin-bottom:10px}
 .name{color:var(--acc)}
+/* Per-letter hover hint */
+.jl{position:relative;cursor:default}
+.jl::after{content:attr(data-w);position:absolute;left:50%;bottom:-22px;transform:translateX(-50%) translateY(4px);font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--acc);background:rgba(0,212,170,.08);border:0.5px solid rgba(0,212,170,.2);border-radius:5px;padding:2px 7px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:10}
+.jl:hover::after{opacity:1;transform:translateX(-50%) translateY(0)}
 .arr{font-size:clamp(11px,3vw,16px);color:var(--t3);letter-spacing:5px;font-weight:400;margin-bottom:18px;animation:fa 3s ease-in-out infinite}
 @keyframes fa{0%,100%{opacity:.4}50%{opacity:.85}}
 .hero-sub{font-size:clamp(14px,4vw,15.5px);color:var(--t2);line-height:1.75;max-width:460px;margin:0 auto 36px}
@@ -202,8 +196,6 @@ footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:2}
   .glyph{font-size:20px}
   @keyframes orb{0%{transform:rotate(0deg) translateX(37px)}100%{transform:rotate(360deg) translateX(37px)}}
   h1{letter-spacing:-1px}
-  .julie-title{font-size:clamp(28px,8vw,48px)}
-  .jl-ai{font-size:.6em}
   .arr{letter-spacing:3px}
   .btn-row{flex-direction:column;align-items:stretch}
   .btn-p,.btn-g{width:100%;text-align:center}
@@ -267,15 +259,7 @@ footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:2}
     <div class="odot odot2"></div>
     <div class="ring-core"><span class="glyph">✦</span></div>
   </div>
-  <!-- Acronym animation title -->
-  <div class="julie-title" id="julie-title" aria-label="J.U.L.I.E AI">
-    <span class="jl-grp" data-rest="son"><span class="jl-letter">J</span><span class="jl-rest">son</span></span><span class="jl-sep">.</span>
-    <span class="jl-grp" data-rest="nderstandable"><span class="jl-letter">U</span><span class="jl-rest">nderstandable</span></span><span class="jl-sep">.</span>
-    <span class="jl-grp" data-rest="anguage"><span class="jl-letter">L</span><span class="jl-rest">anguage</span></span><span class="jl-sep">.</span>
-    <span class="jl-grp" data-rest="ntelligence"><span class="jl-letter">I</span><span class="jl-rest">ntelligence</span></span><span class="jl-sep">.</span>
-    <span class="jl-grp" data-rest="ngine"><span class="jl-letter">E</span><span class="jl-rest">ngine</span></span>
-    <span class="jl-ai">AI</span>
-  </div>
+  <h1><span class="name"><span class="jl" data-w="Json">J</span>.<span class="jl" data-w="Understandable">U</span>.<span class="jl" data-w="Language">L</span>.<span class="jl" data-w="Intelligence">I</span>.<span class="jl" data-w="Engine">E</span></span> AI</h1>
   <div class="arr">→ &nbsp; ARRIVING SOON</div>
   <p class="hero-sub">Own your AI. No API keys. No per-token bills. No Big Tech middlemen. Your AI, built and customised by the Cosmohentorq technical team.</p>
   <div class="btn-row">
@@ -522,46 +506,6 @@ function closeMenu(){burger.classList.remove('open');drawer.classList.remove('op
 document.addEventListener('click',e=>{
   if(!nav.contains(e.target)&&!drawer.contains(e.target)) closeMenu();
 });
-
-// ── ACRONYM ANIMATION ─────────────────────────────────────────────────────
-(function(){
-  const grps = Array.from(document.querySelectorAll('.jl-grp'));
-  const seps = Array.from(document.querySelectorAll('#julie-title > .jl-sep'));
-
-  function expand(){
-    grps.forEach((g, i) => {
-      setTimeout(() => {
-        g.classList.add('open');
-        // hide the dot after this group
-        if(seps[i]) seps[i].style.cssText='opacity:0;max-width:0;overflow:hidden;margin:0;transition:opacity .2s ease,max-width .25s ease';
-      }, i * 120);
-    });
-  }
-
-  function collapse(){
-    [...grps].reverse().forEach((g, i) => {
-      setTimeout(() => {
-        g.classList.remove('open');
-        const idx = grps.length - 1 - i;
-        if(seps[idx]) seps[idx].style.cssText='';
-      }, i * 100);
-    });
-  }
-
-  // Sequence: wait 1s → expand (stagger) → hold 2.5s → collapse → hold 2s → repeat
-  function run(){
-    setTimeout(() => {
-      expand();
-      const expandDur = grps.length * 120 + 450;
-      setTimeout(() => {
-        collapse();
-        const collapseDur = grps.length * 100 + 400;
-        setTimeout(run, collapseDur + 2000);
-      }, expandDur + 2500);
-    }, 1200);
-  }
-  run();
-})();
 
 // ── SCROLL REVEAL ─────────────────────────────────────────────────────────
 const io=new IntersectionObserver(entries=>{
