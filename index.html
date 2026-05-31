@@ -9,7 +9,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#05080f;--s1:#0b1020;--s2:#101828;
-  --acc:#00d4aa;--gold:#f5a623;--red:#ff4d5e;
+  --acc:#00d4aa;--gold:#f5a623;--blue:#3d7eff;
   --t1:#dde6f2;--t2:#7a90aa;--t3:#3a5068;
   --b1:rgba(255,255,255,.05);--b2:rgba(255,255,255,.09);--b3:rgba(255,255,255,.04)
 }
@@ -19,136 +19,137 @@ body{background:var(--bg);color:var(--t1);font-family:'DM Sans','Segoe UI',sans-
 #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 /* ── NAV ── */
-nav{position:sticky;top:0;z-index:50;padding:12px 24px;background:rgba(5,8,15,.85);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--b2);display:flex;align-items:center;gap:10px}
+nav{position:sticky;top:0;z-index:50;padding:12px 28px;background:rgba(5,8,15,.88);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--b2);display:flex;align-items:center;gap:10px}
 .nav-logo{font-size:15px;font-weight:700;letter-spacing:1px;color:var(--acc);margin-right:auto;display:flex;align-items:center;gap:8px;text-decoration:none}
-.nav-logo small{color:var(--t2);font-weight:400;font-size:12px;letter-spacing:.5px}
+.nav-logo small{color:var(--t3);font-weight:400;font-size:12px;letter-spacing:.5px}
 .nav-link{font-size:12px;color:var(--t2);padding:5px 12px;border-radius:20px;border:0.5px solid transparent;text-decoration:none;transition:.2s}
 .nav-link:hover{border-color:var(--b2);color:var(--t1)}
-.nav-cta{font-size:12px;font-weight:600;color:var(--bg);background:var(--acc);padding:6px 16px;border-radius:20px;text-decoration:none;transition:.2s;letter-spacing:.3px}
-.nav-cta:hover{filter:brightness(1.1)}
+.nav-cta{font-size:12px;font-weight:600;color:var(--bg);background:var(--acc);padding:6px 16px;border-radius:20px;text-decoration:none;transition:.2s}
+.nav-cta:hover{filter:brightness(1.08)}
 
 /* ── HERO ── */
-.hero{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:88px 24px 72px;text-align:center}
-.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--acc);margin-bottom:32px;background:rgba(0,212,170,.07);border:0.5px solid rgba(0,212,170,.2);padding:5px 14px;border-radius:20px}
-.tag-dot{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:blink 2s ease-in-out infinite;flex-shrink:0}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:92px 24px 76px;text-align:center}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--acc);margin-bottom:32px;background:rgba(0,212,170,.06);border:0.5px solid rgba(0,212,170,.18);padding:5px 14px;border-radius:20px}
+.tag-dot{width:5px;height:5px;border-radius:50%;background:var(--acc);animation:blink 2.5s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-/* Twinkling ring */
-.ring-wrap{position:relative;width:96px;height:96px;margin:0 auto 32px}
-.ring-outer{position:absolute;inset:0;border-radius:50%;border:0.5px solid rgba(0,212,170,.15);animation:spin-slow 14s linear infinite}
-.ring-mid{position:absolute;inset:8px;border-radius:50%;border:1.5px solid rgba(0,212,170,.3);animation:spin-slow 9s linear infinite reverse}
-.ring-inner-el{position:absolute;inset:18px;border-radius:50%;border:0.5px dashed rgba(0,212,170,.18);animation:spin-slow 20s linear infinite}
-@keyframes spin-slow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+/* Ring */
+.ring-wrap{position:relative;width:100px;height:100px;margin:0 auto 36px}
+.ring-a,.ring-b,.ring-c{position:absolute;border-radius:50%;border:1px solid transparent}
+.ring-a{inset:0;border-top-color:rgba(0,212,170,.5);border-right-color:rgba(0,212,170,.2);animation:rs 8s linear infinite}
+.ring-b{inset:12px;border-bottom-color:rgba(61,126,255,.5);border-left-color:rgba(61,126,255,.15);animation:rs 12s linear infinite reverse}
+.ring-c{inset:22px;border:0.5px solid rgba(0,212,170,.1);animation:rs 20s linear infinite}
+@keyframes rs{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 .ring-core{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.ring-glyph{font-size:30px;color:var(--acc);animation:pulse-glyph 3s ease-in-out infinite}
-@keyframes pulse-glyph{0%,100%{opacity:.7;text-shadow:0 0 8px rgba(0,212,170,.3)}50%{opacity:1;text-shadow:0 0 18px rgba(0,212,170,.7)}}
-/* Orbit dots */
-.orbit-dot{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--acc);top:50%;left:50%;animation:orbit 5s linear infinite;transform-origin:0 0}
-.orbit-dot:nth-child(2){animation-duration:7s;animation-delay:-2s;background:#3d7eff;width:4px;height:4px}
-.orbit-dot:nth-child(3){animation-duration:9s;animation-delay:-5s;background:rgba(0,212,170,.5);width:3px;height:3px}
-@keyframes orbit{
-  0%{transform:rotate(0deg) translateX(44px) rotate(0deg);opacity:1}
-  50%{opacity:.4}
-  100%{transform:rotate(360deg) translateX(44px) rotate(-360deg);opacity:1}
-}
+.glyph{font-size:26px;color:var(--acc);animation:gp 3.5s ease-in-out infinite}
+@keyframes gp{0%,100%{opacity:.65;filter:drop-shadow(0 0 4px rgba(0,212,170,.3))}50%{opacity:1;filter:drop-shadow(0 0 12px rgba(0,212,170,.65))}}
+/* orbit dot */
+.odot{position:absolute;width:5px;height:5px;border-radius:50%;top:50%;left:50%;transform-origin:0 0}
+.odot1{background:var(--acc);animation:orb 6s linear infinite}
+.odot2{background:var(--blue);width:4px;height:4px;animation:orb 9s linear infinite reverse;animation-delay:-3s}
+@keyframes orb{0%{transform:rotate(0deg) translateX(48px)}100%{transform:rotate(360deg) translateX(48px)}}
 
-h1{font-size:clamp(38px,7vw,66px);font-weight:700;letter-spacing:-1.5px;line-height:1.05;margin-bottom:10px}
+h1{font-size:clamp(40px,7vw,68px);font-weight:700;letter-spacing:-1.5px;line-height:1.02;margin-bottom:10px}
 .name{color:var(--acc)}
-.arrow-line{font-size:clamp(13px,2vw,18px);color:var(--t3);letter-spacing:4px;font-weight:400;margin-bottom:20px;animation:fade-arrow 3s ease-in-out infinite}
-@keyframes fade-arrow{0%,100%{opacity:.5}50%{opacity:1}}
-.hero-sub{font-size:16px;color:var(--t2);line-height:1.75;max-width:500px;margin:0 auto 40px}
+.arr{font-size:clamp(13px,2vw,17px);color:var(--t3);letter-spacing:5px;font-weight:400;margin-bottom:20px;animation:fa 3s ease-in-out infinite}
+@keyframes fa{0%,100%{opacity:.45}50%{opacity:.9}}
+.hero-sub{font-size:15.5px;color:var(--t2);line-height:1.75;max-width:490px;margin:0 auto 40px}
 
 .btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:var(--bg);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:.3px;transition:.2s}
-.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--t1);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;border:0.5px solid var(--b2);transition:.2s}
-.btn-ghost:hover{border-color:rgba(255,255,255,.2);background:var(--b1)}
-.footer-hint{font-size:12px;color:var(--t3);letter-spacing:.4px}
+.btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:var(--bg);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;letter-spacing:.3px;transition:.2s}
+.btn-p:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--t1);padding:13px 28px;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;border:0.5px solid var(--b2);transition:.2s}
+.btn-g:hover{border-color:rgba(255,255,255,.18);background:var(--b1)}
+.hint{font-size:11.5px;color:var(--t3);letter-spacing:.5px}
 
-/* ── CONTENT WRAPPER ── */
+/* ── LAYOUT ── */
 .wrap{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 24px}
 section{padding:60px 0;border-top:0.5px solid var(--b1)}
-.sec-tag{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
-.sec-title{font-size:26px;font-weight:700;letter-spacing:-.3px;margin-bottom:8px}
-.sec-sub{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:32px;max-width:560px}
+.stag{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
+.stit{font-size:26px;font-weight:700;letter-spacing:-.3px;margin-bottom:8px}
+.ssub{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:32px;max-width:560px}
 
-/* ── DIFF CARDS ── */
-.diff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.diff-card{background:var(--s1);border:0.5px solid var(--b2);border-radius:14px;padding:22px;transition:.25s;animation:card-in .5s ease both}
-.diff-card:hover{border-color:rgba(0,212,170,.25);background:var(--s2);transform:translateY(-2px)}
-@keyframes card-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.diff-icon{width:36px;height:36px;border-radius:9px;background:rgba(0,212,170,.08);border:0.5px solid rgba(0,212,170,.15);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:14px}
-.diff-card h3{font-size:14px;font-weight:600;margin-bottom:6px}
-.diff-card p{font-size:13px;color:var(--t2);line-height:1.6}
+/* ── DIFF GRID ── */
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.dc{background:var(--s1);border:0.5px solid var(--b2);border-radius:14px;padding:22px;transition:.25s;opacity:0;transform:translateY(18px)}
+.dc.vis{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease}
+.dc:hover{border-color:rgba(0,212,170,.22);background:var(--s2);transform:translateY(-2px)}
+.di{width:34px;height:34px;border-radius:9px;background:rgba(0,212,170,.07);border:0.5px solid rgba(0,212,170,.14);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--acc)}
+.di svg{width:16px;height:16px}
+.dc h3{font-size:14px;font-weight:600;margin-bottom:6px}
+.dc p{font-size:13px;color:var(--t2);line-height:1.6}
 
 /* ── TAGS ── */
-.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.tag{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.2px}
-.tag-no{background:rgba(255,77,94,.07);border:0.5px solid rgba(255,77,94,.2);color:#ff6b7a}
-.tag-yes{background:rgba(0,212,170,.07);border:0.5px solid rgba(0,212,170,.2);color:var(--acc)}
+.trow{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.1px}
+.tno{background:rgba(255,77,94,.06);border:0.5px solid rgba(255,77,94,.2);color:#ff6b7a}
+.tyes{background:rgba(0,212,170,.06);border:0.5px solid rgba(0,212,170,.2);color:var(--acc)}
 
 /* ── INVESTOR ── */
-.investor-card{background:var(--s1);border:0.5px solid rgba(245,166,35,.2);border-radius:16px;padding:32px;display:flex;gap:24px;align-items:flex-start}
-.inv-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#e8890a);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#000;flex-shrink:0;animation:pulse-gold 4s ease-in-out infinite}
-@keyframes pulse-gold{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,.2)}50%{box-shadow:0 0 0 8px rgba(245,166,35,0)}}
-.inv-name{font-size:17px;font-weight:700;margin-bottom:3px}
-.inv-role{font-size:12px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px}
-.inv-amount{font-size:28px;font-weight:700;color:var(--gold);letter-spacing:-.5px;margin-bottom:3px}
-.inv-label{font-size:12px;color:var(--t3);margin-bottom:20px}
-.inv-next{background:var(--b3);border:0.5px solid var(--b2);border-radius:10px;padding:14px 16px}
-.inv-next p{font-size:13px;color:var(--t2);line-height:1.65}
-.inv-next a{color:var(--acc);text-decoration:none}
-.inv-next a:hover{text-decoration:underline}
+.icard{background:var(--s1);border:0.5px solid rgba(245,166,35,.18);border-radius:16px;padding:32px;display:flex;gap:24px;align-items:flex-start;opacity:0;transform:translateY(18px)}
+.icard.vis{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease}
+.iav{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#d4780a);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#000;flex-shrink:0;animation:pg 4s ease-in-out infinite}
+@keyframes pg{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,.18)}50%{box-shadow:0 0 0 8px rgba(245,166,35,0)}}
+.iname{font-size:17px;font-weight:700;margin-bottom:3px}
+.irole{font-size:12px;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px}
+.iamt{font-size:28px;font-weight:700;color:var(--gold);letter-spacing:-.5px;margin-bottom:3px}
+.ilbl{font-size:12px;color:var(--t3);margin-bottom:18px}
+.inext{background:var(--b3);border:0.5px solid var(--b2);border-radius:10px;padding:14px 16px}
+.inext p{font-size:13px;color:var(--t2);line-height:1.65}
+.inext a{color:var(--acc);text-decoration:none}
+.inext a:hover{text-decoration:underline}
 
-/* ── PROFILE LINK ── */
-.profile-link-box{margin-top:20px;background:rgba(0,212,170,.04);border:0.5px solid rgba(0,212,170,.15);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.profile-link-box p{font-size:13px;color:var(--t2);line-height:1.55}
-.profile-link-box p strong{color:var(--t1)}
-.profile-link-box a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--acc);text-decoration:none;white-space:nowrap;border:0.5px solid rgba(0,212,170,.3);padding:7px 14px;border-radius:8px;transition:.2s}
-.profile-link-box a:hover{background:rgba(0,212,170,.08)}
+.plink{margin-top:18px;background:rgba(0,212,170,.04);border:0.5px solid rgba(0,212,170,.14);border-radius:12px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;opacity:0;transform:translateY(14px)}
+.plink.vis{opacity:1;transform:none;transition:opacity .5s ease .1s, transform .5s ease .1s}
+.plink p{font-size:13px;color:var(--t2);line-height:1.55}
+.plink p strong{color:var(--t1)}
+.plink a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--acc);text-decoration:none;white-space:nowrap;border:0.5px solid rgba(0,212,170,.28);padding:7px 14px;border-radius:8px;transition:.2s}
+.plink a:hover{background:rgba(0,212,170,.07)}
 
 /* ── PREBOOK ── */
-.prebook-box{background:var(--s1);border:0.5px solid var(--b2);border-radius:16px;padding:36px}
-.countdown{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap}
-.cd-unit{background:var(--s2);border:0.5px solid var(--b2);border-radius:10px;padding:16px 20px;min-width:74px;text-align:center}
-.cd-num{font-size:28px;font-weight:700;color:var(--acc);display:block;letter-spacing:-1px;line-height:1}
-.cd-lbl{font-size:10px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
-.pb-form{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.pb-input{flex:1;min-width:200px;background:var(--s2);border:0.5px solid var(--b2);color:var(--t1);padding:13px 16px;border-radius:10px;font-size:14px;outline:none;transition:.2s;font-family:inherit}
-.pb-input:focus{border-color:rgba(0,212,170,.4)}
-.pb-input::placeholder{color:var(--t3)}
-.pb-note{font-size:12px;color:var(--t3)}
-#pb-msg{font-size:13px;color:var(--acc);margin-top:10px;min-height:20px}
+.pb-box{background:var(--s1);border:0.5px solid var(--b2);border-radius:16px;padding:36px;opacity:0;transform:translateY(18px)}
+.pb-box.vis{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease}
+.cd{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+.cdu{background:var(--s2);border:0.5px solid var(--b2);border-radius:10px;padding:16px 20px;min-width:74px;text-align:center}
+.cdn{font-size:28px;font-weight:700;color:var(--acc);display:block;letter-spacing:-1px;line-height:1}
+.cdl{font-size:10px;color:var(--t3);letter-spacing:1px;text-transform:uppercase;margin-top:5px}
+.pb-cta{display:inline-flex;align-items:center;gap:10px;background:var(--acc);color:var(--bg);padding:14px 28px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.3px;transition:.2s}
+.pb-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.pb-cta svg{width:18px;height:18px}
+.pb-note{font-size:12px;color:var(--t3);margin-top:14px}
 
 /* ── CONTACT ── */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-.contact-card{background:var(--s1);border:0.5px solid var(--b2);border-radius:14px;padding:20px;text-decoration:none;color:inherit;transition:.2s;display:block}
-.contact-card:hover{border-color:rgba(0,212,170,.25);background:var(--s2);transform:translateY(-2px)}
-.cc-icon{font-size:20px;margin-bottom:10px;display:block}
-.cc-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px}
+.cc{background:var(--s1);border:0.5px solid var(--b2);border-radius:14px;padding:20px;text-decoration:none;color:inherit;transition:.2s;display:block;opacity:0;transform:translateY(14px)}
+.cc.vis{opacity:1;transform:none;transition:opacity .4s ease, transform .4s ease}
+.cc:hover{border-color:rgba(0,212,170,.22);background:var(--s2);transform:translateY(-2px)}
+.cico{width:32px;height:32px;border-radius:8px;background:rgba(0,212,170,.07);border:0.5px solid rgba(0,212,170,.14);display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--acc)}
+.cico svg{width:15px;height:15px}
+.cc-lbl{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
 .cc-val{font-size:13px;color:var(--acc);word-break:break-all}
-.contact-card.wa .cc-val{color:#25d366}
-.contact-card.li .cc-val{color:#0a66c2}
-.contact-card.ig .cc-val{color:#e1306c}
+.cc.wa .cc-val{color:#25d366}
+.cc.li .cc-val{color:#5ea5db}
+.cc.ig .cc-val{color:#e1306c}
+.cc.wb .cc-val{color:var(--t1)}
 
 /* ── FOOTER ── */
-footer{position:relative;z-index:1;margin-top:auto;padding:32px 24px 24px;border-top:0.5px solid var(--b1);text-align:center}
-.footer-logo{font-size:14px;font-weight:700;letter-spacing:1.5px;color:var(--acc);margin-bottom:12px}
-.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:16px}
-.footer-links a{font-size:12px;color:var(--t3);text-decoration:none;transition:.2s;letter-spacing:.3px}
-.footer-links a:hover{color:var(--t1)}
-.social-row{display:flex;justify-content:center;gap:10px;margin-bottom:16px}
-.soc-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);text-decoration:none;padding:6px 12px;border-radius:20px;border:0.5px solid var(--b2);transition:.2s;letter-spacing:.3px}
-.soc-btn:hover{border-color:rgba(0,212,170,.3);color:var(--acc)}
-footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:1.8}
+footer{position:relative;z-index:1;margin-top:auto;padding:32px 24px 28px;border-top:0.5px solid var(--b1);text-align:center}
+.flogo{font-size:14px;font-weight:700;letter-spacing:1.5px;color:var(--acc);margin-bottom:14px}
+.srow{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.sb{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);text-decoration:none;padding:5px 12px;border-radius:20px;border:0.5px solid var(--b2);transition:.2s}
+.sb svg{width:13px;height:13px}
+.sb:hover{border-color:rgba(0,212,170,.28);color:var(--acc)}
+.flinks{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.flinks a{font-size:12px;color:var(--t3);text-decoration:none;transition:.2s}
+.flinks a:hover{color:var(--t1)}
+footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:1.9}
 
 @media(max-width:640px){
-  .hero{padding:64px 20px 56px}
-  .investor-card{flex-direction:column;gap:16px}
-  .prebook-box{padding:24px 20px}
-  .pb-form{flex-direction:column}
+  .hero{padding:68px 20px 56px}
+  .icard{flex-direction:column;gap:16px}
+  .pb-box{padding:24px 18px}
   nav .nav-link{display:none}
-  .profile-link-box{flex-direction:column;align-items:flex-start}
+  .plink{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -170,166 +171,165 @@ footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:1.8}
   <div class="hero-tag"><span class="tag-dot"></span>Cosmohentorq Labs · Classified Project</div>
 
   <div class="ring-wrap">
-    <div class="ring-outer"></div>
-    <div class="ring-mid"></div>
-    <div class="ring-inner-el"></div>
-    <div class="orbit-dot"></div>
-    <div class="orbit-dot"></div>
-    <div class="orbit-dot"></div>
-    <div class="ring-core"><span class="ring-glyph">✦</span></div>
+    <div class="ring-a"></div>
+    <div class="ring-b"></div>
+    <div class="ring-c"></div>
+    <div class="odot odot1"></div>
+    <div class="odot odot2"></div>
+    <div class="ring-core"><span class="glyph">✦</span></div>
   </div>
 
   <h1><span class="name">J.U.L.I.E</span> AI</h1>
-  <div class="arrow-line">→ &nbsp; ARRIVING SOON</div>
+  <div class="arr">→ &nbsp; ARRIVING SOON</div>
   <p class="hero-sub">
     Own your AI. No API keys. No per-token bills. No Big Tech middlemen.<br/>
     Your AI, built and customised by the Cosmohentorq technical team.
   </p>
   <div class="btn-row">
-    <a href="#prebook" class="btn-primary">Reserve my slot</a>
-    <a href="https://wa.me/918754883872" target="_blank" class="btn-ghost">WhatsApp us</a>
+    <a href="#prebook" class="btn-p">Reserve my slot</a>
+    <a href="https://wa.me/918754883872" target="_blank" class="btn-g">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L.054 23.25a.75.75 0 00.917.916l5.562-1.49A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.957 9.957 0 01-5.031-1.36l-.36-.214-3.735 1.001 1-3.645-.234-.374A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      WhatsApp us
+    </a>
   </div>
-  <div class="footer-hint">100% LOCAL &nbsp;·&nbsp; ZERO CLOUD &nbsp;·&nbsp; ALWAYS ON</div>
+  <div class="hint">100% LOCAL &nbsp;·&nbsp; ZERO CLOUD &nbsp;·&nbsp; ALWAYS ON</div>
 </div>
 
 <div class="wrap">
 
   <!-- WHY -->
   <section id="different">
-    <div class="sec-tag">What makes J.U.L.I.E different</div>
-    <div class="sec-title">Not just another AI.</div>
-    <div class="sec-sub">
-      J.U.L.I.E doesn't operate like ChatGPT, Gemini, or Copilot. No API handshakes,
-      no third-party token costs, no Big Tech pipelines. A completely different method — J.U.L.I.E is yours.
-    </div>
-    <div class="diff-grid">
-      <div class="diff-card" style="animation-delay:.05s">
-        <div class="diff-icon">🔒</div>
+    <div class="stag">What makes J.U.L.I.E different</div>
+    <div class="stit">Not just another AI.</div>
+    <div class="ssub">J.U.L.I.E doesn't operate like ChatGPT, Gemini, or Copilot. No API handshakes, no third-party token costs, no Big Tech pipelines. A completely different method — J.U.L.I.E is yours.</div>
+    <div class="dgrid">
+      <div class="dc">
+        <div class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h3>Zero API Dependency</h3>
         <p>No OpenAI. No Gemini. Runs entirely on Cosmohentorq's own infrastructure — no third-party token costs ever.</p>
       </div>
-      <div class="diff-card" style="animation-delay:.1s">
-        <div class="diff-icon">🌐</div>
+      <div class="dc">
+        <div class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         <h3>Your Data Stays Yours</h3>
         <p>Deployed in your environment. Not in Big Tech's cloud where your data trains their next model.</p>
       </div>
-      <div class="diff-card" style="animation-delay:.15s">
-        <div class="diff-icon">⚙️</div>
+      <div class="dc">
+        <div class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
         <h3>Deep Customisation</h3>
         <p>Our technical team tailors J.U.L.I.E to your brand, language, and workflow — not a generic chatbot.</p>
       </div>
-      <div class="diff-card" style="animation-delay:.2s">
-        <div class="diff-icon">⚡</div>
+      <div class="dc">
+        <div class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <h3>Works for Free</h3>
         <p>Not metered per call or token. Once yours, it runs continuously — no monthly API bills.</p>
       </div>
-      <div class="diff-card" style="animation-delay:.25s">
-        <div class="diff-icon">🗣️</div>
+      <div class="dc">
+        <div class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <h3>Tamil &amp; Multilingual</h3>
         <p>Built for Indian languages from day one. Tamil, Tanglish, Hindi-English — how real people speak.</p>
       </div>
-      <div class="diff-card" style="animation-delay:.3s">
-        <div class="diff-icon">🎙️</div>
+      <div class="dc">
+        <div class="di"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg></div>
         <h3>Voice-Native</h3>
         <p>J.U.L.I.E hears, thinks, and speaks. Real-time voice interactions — AI beyond the keyboard.</p>
       </div>
     </div>
-    <div class="tag-row">
-      <span class="tag tag-no">✗ No OpenAI APIs</span>
-      <span class="tag tag-no">✗ No Per-Token Billing</span>
-      <span class="tag tag-no">✗ No Big Tech Lock-in</span>
-      <span class="tag tag-no">✗ No Data Sharing</span>
-      <span class="tag tag-yes">✓ Own Your AI</span>
-      <span class="tag tag-yes">✓ One-Time Setup</span>
-      <span class="tag tag-yes">✓ Private &amp; Secure</span>
-      <span class="tag tag-yes">✓ Custom Voice &amp; Brain</span>
+    <div class="trow">
+      <span class="tag tno">✗ No OpenAI APIs</span>
+      <span class="tag tno">✗ No Per-Token Billing</span>
+      <span class="tag tno">✗ No Big Tech Lock-in</span>
+      <span class="tag tno">✗ No Data Sharing</span>
+      <span class="tag tyes">✓ Own Your AI</span>
+      <span class="tag tyes">✓ One-Time Setup</span>
+      <span class="tag tyes">✓ Private &amp; Secure</span>
+      <span class="tag tyes">✓ Custom Voice &amp; Brain</span>
     </div>
   </section>
 
   <!-- INVESTORS -->
   <section id="investors">
-    <div class="sec-tag">Investors &amp; Believers</div>
-    <div class="sec-title">Those who saw the vision first.</div>
-    <div class="sec-sub">Before the product. Before the launch. These are the minds that backed the mission.</div>
+    <div class="stag">Investors &amp; Believers</div>
+    <div class="stit">Those who saw the vision first.</div>
+    <div class="ssub">Before the product. Before the launch. These are the minds that backed the mission.</div>
 
-    <div class="investor-card">
-      <div class="inv-avatar">A</div>
+    <div class="icard">
+      <div class="iav">A</div>
       <div style="flex:1">
-        <div class="inv-name">Adityaa Venkataraman</div>
-        <div class="inv-role">Founding Investor · Cosmohentorq</div>
-        <div class="inv-amount">₹41,500</div>
-        <div class="inv-label">Invested in Cosmohentorq so far</div>
-        <div class="inv-next">
-          <p>
-            <strong style="color:var(--t1)">Next investor could be you.</strong><br/>
-            J.U.L.I.E is pre-revenue and pre-launch. Early believers get the best terms.
-            Reach us at <a href="mailto:apex@cosmohentorq.com">apex@cosmohentorq.com</a> to discuss.
-          </p>
+        <div class="iname">Adityaa Venkataraman</div>
+        <div class="irole">Founding Investor · Cosmohentorq</div>
+        <div class="iamt">₹41,500</div>
+        <div class="ilbl">Invested in Cosmohentorq so far</div>
+        <div class="inext">
+          <p><strong style="color:var(--t1)">Next investor could be you.</strong><br/>
+          J.U.L.I.E is pre-revenue and pre-launch. Early believers get the best terms.
+          Reach us at <a href="mailto:apex@cosmohentorq.com">apex@cosmohentorq.com</a> to discuss.</p>
         </div>
       </div>
     </div>
 
-    <div class="profile-link-box">
+    <div class="plink">
       <p><strong>Explore our full startup profile</strong><br/>See our vision, team, and traction on the Cosmohentorq investor page.</p>
-      <a href="https://startup.cosmohentorq.com" target="_blank">View Investor Profile →</a>
+      <a href="https://startup.cosmohentorq.com" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Investor Profile
+      </a>
     </div>
   </section>
 
   <!-- PREBOOK -->
   <section id="prebook">
-    <div class="sec-tag">Early Access</div>
-    <div class="sec-title">Pre-book your J.U.L.I.E slot.</div>
-    <div class="sec-sub">Limited early-access deployments. Pre-book now to secure your place in the first rollout.</div>
-    <div class="prebook-box">
-      <div class="countdown">
-        <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><div class="cd-lbl">Days</div></div>
-        <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><div class="cd-lbl">Hours</div></div>
-        <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><div class="cd-lbl">Mins</div></div>
-        <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><div class="cd-lbl">Secs</div></div>
+    <div class="stag">Early Access</div>
+    <div class="stit">Pre-book your J.U.L.I.E slot.</div>
+    <div class="ssub">Limited early-access deployments. Pre-book now to secure your place in the first rollout.</div>
+    <div class="pb-box">
+      <div class="cd">
+        <div class="cdu"><span class="cdn" id="cd-d">--</span><div class="cdl">Days</div></div>
+        <div class="cdu"><span class="cdn" id="cd-h">--</span><div class="cdl">Hours</div></div>
+        <div class="cdu"><span class="cdn" id="cd-m">--</span><div class="cdl">Mins</div></div>
+        <div class="cdu"><span class="cdn" id="cd-s">--</span><div class="cdl">Secs</div></div>
       </div>
-      <form class="pb-form" onsubmit="handleBook(event)">
-        <input class="pb-input" type="email" id="pb-email" placeholder="your@email.com" required/>
-        <button type="submit" class="btn-primary" style="border:none;cursor:pointer;white-space:nowrap">Book my slot →</button>
-      </form>
-      <div class="pb-note">Your info stays private. No spam. Just launch updates.</div>
-      <div id="pb-msg"></div>
+      <a href="https://wa.me/918754883872?text=Hi%20Cosmohentorq%2C%20I%20want%20to%20pre-book%20a%20J.U.L.I.E%20slot." target="_blank" class="pb-cta">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L.054 23.25a.75.75 0 00.917.916l5.562-1.49A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.957 9.957 0 01-5.031-1.36l-.36-.214-3.735 1.001 1-3.645-.234-.374A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Book my slot on WhatsApp
+      </a>
+      <div class="pb-note">Tap to open WhatsApp — no sign-up needed.</div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="sec-tag">Get in touch</div>
-    <div class="sec-title">Reach the Cosmohentorq team.</div>
-    <div class="sec-sub">Investor, early adopter, or just curious — we'd love to hear from you.</div>
-    <div class="contact-grid">
-      <a href="mailto:labs@cosmohentorq.com" class="contact-card">
-        <span class="cc-icon">🔬</span>
-        <div class="cc-label">Research &amp; Labs</div>
+    <div class="stag">Get in touch</div>
+    <div class="stit">Reach the Cosmohentorq team.</div>
+    <div class="ssub">Investor, early adopter, or just curious — we'd love to hear from you.</div>
+    <div class="cgrid">
+      <a href="mailto:labs@cosmohentorq.com" class="cc">
+        <div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg></div>
+        <div class="cc-lbl">Research &amp; Labs</div>
         <div class="cc-val">labs@cosmohentorq.com</div>
       </a>
-      <a href="mailto:apex@cosmohentorq.com" class="contact-card">
-        <span class="cc-icon">📈</span>
-        <div class="cc-label">Investments</div>
+      <a href="mailto:apex@cosmohentorq.com" class="cc">
+        <div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="cc-lbl">Investments</div>
         <div class="cc-val">apex@cosmohentorq.com</div>
       </a>
-      <a href="https://wa.me/918754883872" target="_blank" class="contact-card wa">
-        <span class="cc-icon">💬</span>
-        <div class="cc-label">WhatsApp</div>
+      <a href="https://wa.me/918754883872" target="_blank" class="cc wa">
+        <div class="cico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L.054 23.25a.75.75 0 00.917.916l5.562-1.49A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.957 9.957 0 01-5.031-1.36l-.36-.214-3.735 1.001 1-3.645-.234-.374A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></div>
+        <div class="cc-lbl">WhatsApp</div>
         <div class="cc-val">+91 87548 83872</div>
       </a>
-      <a href="https://www.linkedin.com/company/cosmohentorq" target="_blank" class="contact-card li">
-        <span class="cc-icon">💼</span>
-        <div class="cc-label">LinkedIn</div>
+      <a href="https://www.linkedin.com/company/cosmohentorq" target="_blank" class="cc li">
+        <div class="cico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+        <div class="cc-lbl">LinkedIn</div>
         <div class="cc-val">Cosmohentorq</div>
       </a>
-      <a href="https://www.instagram.com/cosmohentorq" target="_blank" class="contact-card ig">
-        <span class="cc-icon">📸</span>
-        <div class="cc-label">Instagram</div>
+      <a href="https://www.instagram.com/cosmohentorq" target="_blank" class="cc ig">
+        <div class="cico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+        <div class="cc-lbl">Instagram</div>
         <div class="cc-val">@cosmohentorq</div>
       </a>
-      <a href="https://cosmohentorq.com" target="_blank" class="contact-card">
-        <span class="cc-icon">🌐</span>
-        <div class="cc-label">Website</div>
+      <a href="https://cosmohentorq.com" target="_blank" class="cc wb">
+        <div class="cico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="cc-lbl">Website</div>
         <div class="cc-val">cosmohentorq.com</div>
       </a>
     </div>
@@ -339,104 +339,105 @@ footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:1.8}
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">✦ J.U.L.I.E &nbsp;·&nbsp; COSMOHENTORQ</div>
-  <div class="social-row">
-    <a href="https://www.linkedin.com/company/cosmohentorq" target="_blank" class="soc-btn">💼 LinkedIn</a>
-    <a href="https://www.instagram.com/cosmohentorq" target="_blank" class="soc-btn">📸 Instagram</a>
-    <a href="https://wa.me/918754883872" target="_blank" class="soc-btn">💬 WhatsApp</a>
-    <a href="https://cosmohentorq.com" target="_blank" class="soc-btn">🌐 Website</a>
-    <a href="https://startup.cosmohentorq.com" target="_blank" class="soc-btn">📊 Investor Profile</a>
+  <div class="flogo">✦ J.U.L.I.E &nbsp;·&nbsp; COSMOHENTORQ</div>
+  <div class="srow">
+    <a href="https://www.linkedin.com/company/cosmohentorq" target="_blank" class="sb">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://www.instagram.com/cosmohentorq" target="_blank" class="sb">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      Instagram
+    </a>
+    <a href="https://wa.me/918754883872" target="_blank" class="sb">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.534 5.857L.054 23.25a.75.75 0 00.917.916l5.562-1.49A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.957 9.957 0 01-5.031-1.36l-.36-.214-3.735 1.001 1-3.645-.234-.374A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      WhatsApp
+    </a>
+    <a href="https://cosmohentorq.com" target="_blank" class="sb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website
+    </a>
+    <a href="https://startup.cosmohentorq.com" target="_blank" class="sb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Investor Profile
+    </a>
   </div>
-  <div class="footer-links">
+  <div class="flinks">
     <a href="https://cosmohentorq.com">cosmohentorq.com</a>
     <a href="https://startup.cosmohentorq.com">Investor Profile</a>
     <a href="mailto:labs@cosmohentorq.com">Labs</a>
     <a href="mailto:apex@cosmohentorq.com">Business</a>
   </div>
   <p>© 2026 Cosmohentorq Innovations. All rights reserved.</p>
-  <p>J.U.L.I.E — Arriving Soon &nbsp;·&nbsp; Redefining AI Ownership</p>
+  <p>J.U.L.I.E — Arriving Soon · Redefining AI Ownership</p>
 </footer>
 
 <script>
-// ── STARFIELD ──────────────────────────────────────────────────────────────
+// ── STARFIELD ─────────────────────────────────────────────────────────────
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 let stars = [];
-
 function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  initStars();
-}
-
-function initStars(){
   stars = [];
-  const n = Math.floor(canvas.width * canvas.height / 6000);
+  const n = Math.floor(canvas.width * canvas.height / 5500);
   for(let i = 0; i < n; i++){
     stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.2 + 0.2,
-      a: Math.random(),
-      da: (Math.random() * 0.008 + 0.002) * (Math.random() > .5 ? 1 : -1),
-      color: Math.random() > .88 ? 'rgba(0,212,170,' : Math.random() > .75 ? 'rgba(61,126,255,' : 'rgba(221,230,242,'
+      x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+      r: Math.random()*1.1+0.2,
+      a: Math.random(), da: (Math.random()*.007+.002)*(Math.random()>.5?1:-1),
+      col: Math.random()>.9?'0,212,170':Math.random()>.78?'61,126,255':'221,230,242'
     });
   }
 }
-
-function drawStars(){
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   for(const s of stars){
     s.a += s.da;
-    if(s.a >= 1){ s.a = 1; s.da = -Math.abs(s.da); }
-    if(s.a <= 0.05){ s.a = 0.05; s.da = Math.abs(s.da); }
+    if(s.a>=1){s.a=1;s.da=-Math.abs(s.da);}
+    if(s.a<=.06){s.a=.06;s.da=Math.abs(s.da);}
     ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = s.color + s.a.toFixed(2) + ')';
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${s.col},${s.a.toFixed(2)})`;
     ctx.fill();
   }
-  requestAnimationFrame(drawStars);
+  requestAnimationFrame(draw);
 }
+window.addEventListener('resize',resize);
+resize(); draw();
 
-window.addEventListener('resize', resize);
-resize();
-drawStars();
-
-// ── COUNTDOWN (100 days) ──────────────────────────────────────────────────
-const target = new Date(Date.now() + 100*24*60*60*1000);
+// ── COUNTDOWN — persisted in localStorage ─────────────────────────────────
+const KEY = 'julie_launch_target';
+let stored = localStorage.getItem(KEY);
+let target;
+if(stored){
+  target = new Date(parseInt(stored,10));
+  // sanity: if somehow in the past (> 100 days ago), reset
+  if(target < Date.now()) {
+    target = new Date(Date.now() + 100*24*60*60*1000);
+    localStorage.setItem(KEY, target.getTime());
+  }
+} else {
+  target = new Date(Date.now() + 100*24*60*60*1000);
+  localStorage.setItem(KEY, target.getTime());
+}
 function tick(){
   const d = target - Date.now();
-  if(d <= 0) return;
-  document.getElementById('cd-d').textContent = String(Math.floor(d/864e5)).padStart(2,'0');
-  document.getElementById('cd-h').textContent = String(Math.floor(d%864e5/36e5)).padStart(2,'0');
-  document.getElementById('cd-m').textContent = String(Math.floor(d%36e5/6e4)).padStart(2,'0');
-  document.getElementById('cd-s').textContent = String(Math.floor(d%6e4/1e3)).padStart(2,'0');
+  if(d<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');return;}
+  document.getElementById('cd-d').textContent=String(Math.floor(d/864e5)).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(Math.floor(d%864e5/36e5)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor(d%36e5/6e4)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(Math.floor(d%6e4/1e3)).padStart(2,'0');
 }
-setInterval(tick, 1000); tick();
-
-// ── PREBOOK ───────────────────────────────────────────────────────────────
-function handleBook(e){
-  e.preventDefault();
-  const email = document.getElementById('pb-email').value;
-  document.getElementById('pb-msg').textContent = '✓  Slot reserved for ' + email + '. We\'ll reach out before launch.';
-  document.getElementById('pb-email').value = '';
-  setTimeout(() => window.open('https://wa.me/918754883872?text=Hi%20Cosmohentorq%2C%20I%20want%20to%20pre-book%20a%20J.U.L.I.E%20slot.%20My%20email%3A%20' + encodeURIComponent(email), '_blank'), 1000);
-}
+setInterval(tick,1000); tick();
 
 // ── SCROLL REVEAL ─────────────────────────────────────────────────────────
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      e.target.style.opacity = '1';
-      e.target.style.transform = 'translateY(0)';
-    }
-  });
-}, {threshold: 0.1});
-
-document.querySelectorAll('.investor-card,.prebook-box,.profile-link-box,.contact-card').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity .5s ease, transform .5s ease';
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); });
+},{threshold:.1});
+document.querySelectorAll('.dc,.icard,.plink,.pb-box,.cc').forEach((el,i)=>{
+  el.style.transitionDelay = (i*0.04)+'s';
   io.observe(el);
 });
 </script>
