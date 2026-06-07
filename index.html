@@ -378,8 +378,8 @@ footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:2}
   <!-- PREBOOK -->
   <section id="prebook">
     <div class="stag">Early Access</div>
-    <div class="stit">Pre-book your J.U.L.I.E slot.</div>
-    <div class="ssub">Limited early-access deployments. Pre-book now to secure your place in the first rollout.</div>
+    <div class="stit">Launching 15 August 2026.</div>
+    <div class="ssub">Limited early-access deployments. Pre-book now to secure your place on launch day.</div>
     <div class="pb-box">
       <div class="cd">
         <div class="cdu"><span class="cdn" id="cd-d">--</span><div class="cdl">Days</div></div>
@@ -512,15 +512,8 @@ function draw(){
 window.addEventListener('resize',resize);
 resize();draw();
 
-// ── COUNTDOWN — persisted in localStorage ─────────────────────────────────
-const KEY='julie_launch_target';
-let stored=localStorage.getItem(KEY),target;
-if(stored){
-  target=new Date(parseInt(stored,10));
-  if(target<Date.now()){target=new Date(Date.now()+100*864e5);localStorage.setItem(KEY,target.getTime());}
-}else{
-  target=new Date(Date.now()+100*864e5);localStorage.setItem(KEY,target.getTime());
-}
+// ── COUNTDOWN — fixed to 15 Aug 2026 00:00 IST ────────────────────────────
+const target=new Date('2026-08-15T00:00:00+05:30');
 function tick(){
   const d=target-Date.now();
   if(d<=0){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');return;}
