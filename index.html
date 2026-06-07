@@ -13,20 +13,39 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#05080f;--s1:#0b1020;--s2:#101828;
+  --bg:#000000;--s1:#0a0a0a;--s2:#111111;
   --acc:#00d4aa;--gold:#f5a623;--blue:#3d7eff;
   --t1:#dde6f2;--t2:#7a90aa;--t3:#3a5068;
-  --b1:rgba(255,255,255,.05);--b2:rgba(255,255,255,.09);--b3:rgba(255,255,255,.04);
+  --b1:rgba(255,255,255,.05);--b2:rgba(255,255,255,.07);--b3:rgba(255,255,255,.04);
   --r:14px;--gap:12px
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--t1);font-family:'DM Sans','Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{
+  background:#000000;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:60px 60px;
+  color:var(--t1);font-family:'DM Sans','Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;-webkit-font-smoothing:antialiased;cursor:none
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor{position:fixed;top:0;left:0;width:10px;height:10px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen}
+.cursor-follower{position:fixed;top:0;left:0;width:36px;height:36px;border:1.5px solid rgba(255,255,255,.18);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .12s ease,width .3s,height .3s,border-color .3s}
+.cursor.hover{width:20px;height:20px;background:var(--acc)}
+.cursor-follower.hover{width:56px;height:56px;border-color:var(--acc)}
+@media(max-width:768px){.cursor,.cursor-follower{display:none}body{cursor:auto}}
 
 /* ── STARFIELD ── */
 #stars{position:fixed;inset:0;z-index:0;pointer-events:none}
 
 /* ══════════════ NAV ══════════════ */
-nav{position:sticky;top:0;z-index:100;padding:0 20px;height:52px;background:rgba(5,8,15,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:0.5px solid var(--b2);display:flex;align-items:center;gap:8px}
+nav{position:sticky;top:0;z-index:100;padding:0 20px;height:52px;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:0.5px solid var(--b2);display:flex;align-items:center;gap:8px}
 .nav-logo{font-size:14px;font-weight:700;letter-spacing:.8px;color:var(--acc);margin-right:auto;display:flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap}
 .nav-logo small{color:var(--t3);font-weight:400;font-size:11px;letter-spacing:.4px}
 .nav-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acc);flex-shrink:0;animation:gp 2.5s ease-in-out infinite}
@@ -44,7 +63,7 @@ nav{position:sticky;top:0;z-index:100;padding:0 20px;height:52px;background:rgba
 .nav-burger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
 
 /* mobile drawer */
-.nav-drawer{display:none;position:fixed;top:52px;left:0;right:0;background:rgba(5,8,15,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:0.5px solid var(--b2);padding:16px 20px;flex-direction:column;gap:4px;z-index:99}
+.nav-drawer{display:none;position:fixed;top:52px;left:0;right:0;background:rgba(0,0,0,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:0.5px solid var(--b2);padding:16px 20px;flex-direction:column;gap:4px;z-index:99}
 .nav-drawer.open{display:flex}
 .nav-drawer a{font-size:14px;color:var(--t2);padding:12px 14px;border-radius:10px;text-decoration:none;border:0.5px solid transparent;transition:.2s}
 .nav-drawer a:hover,.nav-drawer a:active{background:var(--b1);color:var(--t1);border-color:var(--b2)}
@@ -225,6 +244,9 @@ footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:2}
 </style>
 </head>
 <body>
+
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
 
 <canvas id="stars"></canvas>
 
@@ -450,6 +472,18 @@ footer p{font-size:11px;color:var(--t3);letter-spacing:.3px;line-height:2}
 </footer>
 
 <script>
+// ── CUSTOM CURSOR ──────────────────────────────────────────────────────────
+(function(){
+  const cur=document.querySelector('.cursor'),fol=document.querySelector('.cursor-follower');
+  let mx=0,my=0,fx=0,fy=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}});
+  (function af(){if(fol){fx+=(mx-fx)*.1;fy+=(my-fy)*.1;fol.style.left=fx+'px';fol.style.top=fy+'px';}requestAnimationFrame(af);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur?.classList.add('hover');fol?.classList.add('hover');});
+    el.addEventListener('mouseleave',()=>{cur?.classList.remove('hover');fol?.classList.remove('hover');});
+  });
+})();
+
 // ── STARFIELD ──────────────────────────────────────────────────────────────
 const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');
 let stars=[];
