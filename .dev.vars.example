@@ -1,0 +1,8 @@
+# Copy this file to  .dev.vars  and fill in real values for LOCAL dev only.
+# .dev.vars is gitignored. In production these are set in the Cloudflare
+# Pages dashboard (Settings → Environment variables), NOT in the repo.
+
+LITELLM_BASE_URL=https://your-endpoint/v1
+LITELLM_API_KEY=sk-replace-me
+LITELLM_MODEL=your-model-name
+# JULIE_TEMPERATURE=0.7

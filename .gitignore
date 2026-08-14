@@ -1,0 +1,9 @@
+# Local secrets — NEVER commit real keys
+.dev.vars
+.env
+.env.*
+
+# Tooling
+node_modules/
+.wrangler/
+.DS_Store
