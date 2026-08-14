@@ -52,8 +52,22 @@ body{
 .msg.a .av{background:rgba(0,212,255,.1);border:0.5px solid rgba(0,212,255,.35);color:#00d4ff;font-family:'Bitcount Grid Single',monospace}
 .bubble{padding:11px 14px;border-radius:14px;font-size:14.5px;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;max-width:calc(100% - 44px)}
 .msg.u .bubble{background:#fff;color:#000;border-bottom-right-radius:4px}
-.msg.a .bubble{background:var(--s2);border:0.5px solid var(--b2);color:var(--t1);border-bottom-left-radius:4px}
+.msg.a .bubble{background:var(--s2);border:0.5px solid var(--b2);color:var(--t1);border-bottom-left-radius:4px;white-space:normal}
 .blink{display:inline-block;width:7px;height:15px;background:#00d4ff;margin-left:1px;vertical-align:text-bottom;animation:blink 1s step-end infinite;border-radius:1px}
+/* rendered markdown inside assistant bubbles */
+.bubble p{margin:0 0 8px}
+.bubble>*:last-child{margin-bottom:0}
+.bubble strong{font-weight:700;color:#fff}
+.bubble em{font-style:italic}
+.bubble a{color:#00d4ff;text-decoration:underline;overflow-wrap:anywhere}
+.bubble ul,.bubble ol{margin:4px 0 8px;padding-left:20px}
+.bubble li{margin:3px 0}
+.bubble h3,.bubble h4,.bubble h5{margin:10px 0 6px;line-height:1.3;font-weight:700}
+.bubble h3{font-size:16px}.bubble h4{font-size:14.5px}.bubble h5{font-size:13.5px}
+.bubble code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:rgba(255,255,255,.08);border:0.5px solid var(--b2);border-radius:5px;padding:1px 5px}
+.bubble pre{background:#0d0d0d;border:0.5px solid var(--b2);border-radius:10px;padding:12px 14px;overflow-x:auto;margin:8px 0}
+.bubble pre code{background:none;border:none;padding:0;font-size:12.5px;line-height:1.5;display:block;white-space:pre}
+.bubble hr{border:none;border-top:0.5px solid var(--b2);margin:10px 0}
 
 /* suggestions */
 .suggest{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
@@ -124,6 +138,42 @@ textarea::placeholder{color:var(--t3)}
   let busy=false;
 
   function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+  // Minimal, safe Markdown -> HTML (escapes first, then renders a common subset).
+  function mdToHtml(src){
+    src=(src||'').replace(/\r\n?/g,'\n');
+    const store=[];
+    const stash=h=>{store.push(h);return "\uFFFC"+(store.length-1)+"\uFFFC";};
+    // fenced code blocks
+    src=src.replace(/```[\w-]*\n?([\s\S]*?)```/g,(m,code)=>stash('<pre><code>'+esc(code.replace(/\n$/,''))+'</code></pre>'));
+    // inline code
+    src=src.replace(/`([^`\n]+)`/g,(m,c)=>stash('<code>'+esc(c)+'</code>'));
+    src=esc(src);
+    // inline emphasis + links (order matters: bold before italic)
+    src=src.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+    src=src.replace(/__([^_]+)__/g,'<strong>$1</strong>');
+    src=src.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g,'$1<em>$2</em>');
+    src=src.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+    // block level
+    const out=[];let para=[],lt=null,li=[];
+    const fp=()=>{if(para.length){out.push('<p>'+para.join('<br>')+'</p>');para=[];}};
+    const fl=()=>{if(lt){out.push('<'+lt+'>'+li.join('')+'</'+lt+'>');lt=null;li=[];}};
+    for(const line of src.split('\n')){
+      const t=line.trim();let m;
+      if(/^\uFFFC\d+\uFFFC$/.test(t)){fp();fl();out.push(t);continue;}
+      if(t===''){fp();fl();continue;}
+      if(/^(---+|\*\*\*+|___+)$/.test(t)){fp();fl();out.push('<hr>');continue;}
+      if(m=/^(#{1,4})\s+(.*)$/.exec(t)){fp();fl();const lv=Math.min(m[1].length,3)+2;out.push('<h'+lv+'>'+m[2]+'</h'+lv+'>');continue;}
+      if(m=/^[-*]\s+(.*)$/.exec(t)){fp();if(lt!=='ul'){fl();lt='ul';}li.push('<li>'+m[1]+'</li>');continue;}
+      if(m=/^\d+[.)]\s+(.*)$/.exec(t)){fp();if(lt!=='ol'){fl();lt='ol';}li.push('<li>'+m[1]+'</li>');continue;}
+      fl();para.push(t);
+    }
+    fp();fl();
+    let html=out.join('');
+    html=html.replace(/\uFFFC(\d+)\uFFFC/g,(m,i)=>store[+i]);   // restore code
+    return html;
+  }
+
   function scroll(){log.scrollTop=log.scrollHeight;}
 
   function addMsg(role,text){
@@ -197,7 +247,7 @@ textarea::placeholder{color:var(--t3)}
       if(ct.includes('application/json')){
         const j=await res.json();
         acc=j.choices?.[0]?.message?.content||'';
-        if(acc){b.innerHTML=esc(acc);history.push({role:'assistant',content:acc});}
+        if(acc){b.innerHTML=mdToHtml(acc);history.push({role:'assistant',content:acc});}
         else{history.pop();fail('J.U.L.I.E didn\'t return a reply. Please try again.');}
         return;
       }
@@ -218,11 +268,11 @@ textarea::placeholder{color:var(--t3)}
           if(data==='[DONE]') continue;
           try{
             const delta=JSON.parse(data).choices?.[0]?.delta?.content||'';
-            if(delta){acc+=delta;b.innerHTML=esc(acc)+'<span class="blink"></span>';scroll();}
+            if(delta){acc+=delta;b.innerHTML=mdToHtml(acc)+'<span class="blink"></span>';scroll();}
           }catch(_){/* keep-alive / partial */}
         }
       }
-      if(acc){b.innerHTML=esc(acc);history.push({role:'assistant',content:acc});}
+      if(acc){b.innerHTML=mdToHtml(acc);history.push({role:'assistant',content:acc});}
       else{history.pop();fail('J.U.L.I.E didn\'t return a reply. Please try again.');}
     }catch(err){
       history.pop();
